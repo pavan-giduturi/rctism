@@ -69,11 +69,16 @@ class LoginController extends GetxController {
   saveUserDetails(response) async {
     SharedPreferences userPref = await SharedPreferences.getInstance();
     userPref.setString("empCode", response["data"]['emp_code'].toString());
-
+    userPref.setString("empName", response["profile"]['name'].toString());
+    userPref.setString("empSurname", response['profile']['surname'].toString());
+    userPref.setString("empMobNum", response['profile']['mobile'].toString());
     // userPref.setBool("isLogin", true);
     log("==================");
     // log(response.toString());
     log(userPref.getString('empCode').toString());
+    log(userPref.getString('empName').toString());
+    log(userPref.getString('empSurname').toString());
+    log(userPref.getString('empMobNum').toString());
     log("==================");
   }
 }
