@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Row(
                   children: [
                     SizedBox(
-                      width: 250,
+                      width: MediaQuery.of(context).size.width/2,
                       child: Text(
                         'Hello ${e.userName}',
                         overflow: TextOverflow.ellipsis,
@@ -263,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       width: 120,
                                       child: Card(
                                         color: const Color(0xffa697be),
-                                        shape: const RoundedRectangleBorder(),
+                                        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
                                         child: Padding(
                                           padding: const EdgeInsets.all(5.0),
                                           child: Text(
@@ -446,7 +446,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               top: 10,
                               child:  SizedBox(
                                 height: 400,
-                                width: 380,
+                                width: MediaQuery.of(context).size.width/1.15,
                                 child: CarouselSlider.builder(
                                   disableGesture: true,
                                   itemCount: 3,

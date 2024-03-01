@@ -7,6 +7,7 @@ import '../../controllers/onboarding/onboardingcontroller.dart';
 import '../intropages/intopage1.dart';
 import '../intropages/intropage2.dart';
 import '../intropages/intropage3.dart';
+import '../pdprofile/pdprofile.dart';
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({super.key});

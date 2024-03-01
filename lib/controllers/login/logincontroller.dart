@@ -72,6 +72,7 @@ class LoginController extends GetxController {
     userPref.setString("empName", response["profile"]['name'].toString());
     userPref.setString("empSurname", response['profile']['surname'].toString());
     userPref.setString("empMobNum", response['profile']['mobile'].toString());
+    userPref.setString("empRole", response['profile']['role'].toString());
     // userPref.setBool("isLogin", true);
     log("==================");
     // log(response.toString());
@@ -79,6 +80,7 @@ class LoginController extends GetxController {
     log(userPref.getString('empName').toString());
     log(userPref.getString('empSurname').toString());
     log(userPref.getString('empMobNum').toString());
+    log(userPref.getString('empRole').toString());
     log("==================");
   }
 }
