@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rctism/views/home/homescreen.dart';
+
+import '../../apiservice/restapi.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -18,15 +22,19 @@ class _OtpScreenState extends State<OtpScreen> {
   bool enableResend = false;
   Timer? timer;
   String mobOTP = "";
+  String empCode = "";
+  String mobNum = "";
 
   @override
   void initState() {
     super.initState();
-    // log(argumentData.toString());
-    // log('argumentData');
-    // setState(() {
-    //   mobOTP = argumentData['data']['OTP'].toString();
-    // });
+    log(argumentData.toString());
+    log('argumentData');
+    setState(() {
+      mobOTP = argumentData['otp_code'].toString();
+      empCode = argumentData['emp_code'].toString();
+      mobNum = argumentData['otp_mobile'].toString();
+    });
     timer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (secondsRemaining != 0) {
         setState(() {
@@ -64,7 +72,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   height: 16,
                 ),
                 const Text(
-                  "A text message with a 6 digit verification code was just sent to ",
+                  "A text message with a verification code was just sent to the entered mobile number",
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 // Text(
@@ -104,53 +112,41 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // log(argumentData.toString());
-                    // log(otpController.text);
-                    // log('mob otp====');
-                    // log(mobOTP.toString());
+                    log(otpController.text);
+                    log('mob otp====');
+                    // 1709640077
+                    log(mobOTP.toString());
+                    log(empCode.toString());
+                    log(mobNum.toString());
                     if (otpController.text.toString().isEmpty) {
-                      Get.snackbar("Alert", 'Enter Valid OTP',
-                          overlayBlur: 5,
-                          titleText: const Text(
-                            'Alert',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                color: Colors.white),
-                          ),
-                          messageText: const Text(
-                            'Enter Valid OTP',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          backgroundColor: Colors.red);
-                    } else if (mobOTP.toString() !=
-                        otpController.text.toString()) {
-                      Get.snackbar("Alert", 'OTP entered is invalid',
-                          overlayBlur: 5,
-                          titleText: const Text(
-                            'Alert',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                color: Colors.white),
-                          ),
-                          messageText: const Text(
-                            'OTP entered is invalid',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          backgroundColor: Colors.red);
-                    } else {
                       Get.snackbar(
                         "Alert",
-                        'OTP Verified Successfully',
+                        'Enter Valid OTP',
                         overlayBlur: 5,
-                        backgroundColor: Colors.red,
+                        titleText: const Text(
+                          'Alert',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                              color: Colors.white),
+                        ),
+                        backgroundColor: Colors.deepPurple,
+                        barBlur: 3,
+                        colorText: Colors.black,
+                        messageText: const Text(
+                          'Enter Valid OTP',
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      );
+                    } else if (mobOTP.toString() !=
+                        otpController.text.toString()) {
+                      Get.snackbar(
+                        "Alert",
+                        'OTP entered is invalid',
+                        overlayBlur: 5,
                         titleText: const Text(
                           'Alert',
                           style: TextStyle(
@@ -159,13 +155,18 @@ class _OtpScreenState extends State<OtpScreen> {
                               color: Colors.white),
                         ),
                         messageText: const Text(
-                          'OTP Verified Successfully',
+                          'OTP entered is invalid',
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
+                        backgroundColor: Colors.deepPurple,
+                        barBlur: 3,
+                        colorText: Colors.black,
                       );
+                    } else {
+                      verifyOTP();
                     }
                   },
                   child: Container(
@@ -233,7 +234,7 @@ class _OtpScreenState extends State<OtpScreen> {
     setState(() {
       secondsRemaining = 30;
       enableResend = false;
-      // sendOtpApiService(argumentData['data']['Mobile_Number'].toString());
+      getOTP(argumentData[0]);
     });
   }
 
@@ -241,5 +242,92 @@ class _OtpScreenState extends State<OtpScreen> {
   dispose() {
     timer?.cancel();
     super.dispose();
+  }
+
+  getOTP(empMobNum) async {
+    mobOTP = '';
+    log(empMobNum.toString());
+    log('-----------------------');
+    await ApiService.getOTP("login", empMobNum).then((success) {
+      var responseBody = json.decode(success);
+      log(responseBody.toString());
+
+      log(responseBody.toString());
+      if (responseBody['status'].toString() == 'true') {
+        mobOTP = responseBody['otp_code'].toString();
+        Get.snackbar('Alert', 'OTP has been sent successfully',
+            messageText: const Text(
+              'OTP has been sent successfully',
+              style:
+                  TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+            ),
+            titleText: const Text('Alert',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white)),
+            backgroundColor: Colors.deepPurple,
+            barBlur: 3,
+            colorText: Colors.black,
+            animationDuration: const Duration(seconds: 3));
+      } else {
+        Get.snackbar('Alert', 'OTP sending failed',
+            messageText: const Text(
+              'OTP sending failed',
+              style:
+                  TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+            ),
+            titleText: const Text('Alert',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white)),
+            backgroundColor: Colors.deepPurple,
+            barBlur: 20,
+            overlayBlur: 5,
+            colorText: Colors.black,
+            animationDuration: const Duration(seconds: 3));
+        log('error');
+      }
+    });
+  }
+
+  verifyOTP() async {
+    await ApiService.verifyOTP("login", mobNum, mobOTP, empCode)
+        .then((success) {
+      var responseBody = json.decode(success);
+      log(responseBody.toString());
+
+      log(responseBody.toString());
+      if (responseBody['status'].toString() == 'true') {
+        mobOTP = responseBody['otp_code'].toString();
+        Get.snackbar('Alert', 'OTP Verified successfully',
+            messageText: const Text(
+              'OTP Verified successfully',
+              style:
+                  TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+            ),
+            titleText: const Text('Alert',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white)),
+            backgroundColor: Colors.deepPurple,
+            barBlur: 3,
+            colorText: Colors.black,
+            animationDuration: const Duration(seconds: 3));
+        Get.offAll(() => const HomeScreen());
+      } else {
+        Get.snackbar('Alert', 'OTP Verification failed',
+            messageText: const Text(
+              'OTP Verification failed',
+              style:
+                  TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+            ),
+            titleText: const Text('Alert',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white)),
+            backgroundColor: Colors.deepPurple,
+            barBlur: 20,
+            overlayBlur: 5,
+            colorText: Colors.black,
+            animationDuration: const Duration(seconds: 3));
+        log('error');
+      }
+    });
   }
 }

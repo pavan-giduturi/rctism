@@ -2,9 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
-
 import '../../controllers/home/homecontroller.dart';
-
+import '../pdprofile/pdprofile.dart';
+import '../servicerequestforms/servicerequestform1.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 ListTile(
                                   onTap: () {
-                                    // Get.offAll(() => const SearchVoterId());
+                                    Get.to(() => const PdProfile());
                                   },
                                   leading: const Icon(
                                     Icons.person,
@@ -86,9 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 ListTile(
-                                  onTap: () {
-                                    // Get.offAll(() => const SearchVoterId());
-                                  },
+                                  onTap: () {},
                                   leading: const Icon(
                                     Icons.groups_rounded,
                                     color: Color(0xFF503083),
@@ -131,6 +129,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                 ),
+                                ListTile(
+                                  onTap: () {
+                                    e.clearData();
+                                  },
+                                  leading: const Icon(
+                                    Icons.exit_to_app,
+                                    color: Color(0xFF503083),
+                                  ),
+                                  title: const Text(
+                                    'LogOut',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ],
@@ -150,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Row(
                   children: [
                     SizedBox(
-                      width: MediaQuery.of(context).size.width/2,
+                      width: MediaQuery.of(context).size.width / 2,
                       child: Text(
                         'Hello ${e.userName}',
                         overflow: TextOverflow.ellipsis,
@@ -263,7 +276,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       width: 120,
                                       child: Card(
                                         color: const Color(0xffa697be),
-                                        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+                                        shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(8))),
                                         child: Padding(
                                           padding: const EdgeInsets.all(5.0),
                                           child: Text(
@@ -344,7 +359,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               itemCount: e.serviceReqGrid.length,
                               itemBuilder: (BuildContext ctx, index) {
                                 return GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.to(() => const ServiceRequestForm1(),arguments: e.serviceReqGrid[index]['name']
+                                        .toString());
+                                  },
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(
@@ -367,9 +385,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                         ),
-                                        // const SizedBox(
-                                        //   height: 10,
-                                        // ),
                                         Text(
                                           e.serviceReqGrid[index]['name']
                                               .toString(),
@@ -422,7 +437,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                     GestureDetector(
-                                      onTap: (){},
+                                      onTap: () {},
                                       child: const Row(
                                         children: [
                                           Text(
@@ -442,17 +457,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ],
                                 ), //Text
                               ),
-                            Positioned(
-                              top: 10,
-                              child:  SizedBox(
-                                height: 400,
-                                width: MediaQuery.of(context).size.width/1.15,
-                                child: CarouselSlider.builder(
-                                  disableGesture: true,
-                                  itemCount: 3,
-                                  itemBuilder: (BuildContext context, int itemIndex,
-                                      int pageViewIndex) =>
-                                  /* featureadList.isEmpty
+                              Positioned(
+                                top: 10,
+                                child: SizedBox(
+                                  height: 400,
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.15,
+                                  child: CarouselSlider.builder(
+                                      disableGesture: true,
+                                      itemCount: 3,
+                                      itemBuilder: (BuildContext context,
+                                              int itemIndex,
+                                              int pageViewIndex) =>
+                                          /* featureadList.isEmpty
                                             ? Center(
                                           child: Text(
                                             'No Feature Ads available',
@@ -462,29 +479,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                         )
                                             :*/
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: Image.network(
-                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvnlP8WxrZ-syCynvqsQuWalArI-Biyxn4nesRNWqWSA&s',
-                                    ),
-                                  ),
-                                  options: CarouselOptions(
-                                    height: 400,
-                                    aspectRatio: 16 / 9,
-                                    viewportFraction: 0.95,
-                                    initialPage: 0,
-                                    enableInfiniteScroll: true,
-                                    reverse: false,
-                                    autoPlay: true,
-                                    autoPlayInterval: const Duration(seconds: 3),
-                                    autoPlayAnimationDuration:
-                                    const Duration(milliseconds: 800),
-                                    autoPlayCurve: Curves.fastOutSlowIn,
-                                    enlargeCenterPage: true,
-                                    enlargeFactor: 0.3,
-                                    scrollDirection: Axis.horizontal,
-                                  )),
-                              ),)
+                                          GestureDetector(
+                                            onTap: () {},
+                                            child: Image.network(
+                                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvnlP8WxrZ-syCynvqsQuWalArI-Biyxn4nesRNWqWSA&s',
+                                            ),
+                                          ),
+                                      options: CarouselOptions(
+                                        height: 400,
+                                        aspectRatio: 16 / 9,
+                                        viewportFraction: 0.95,
+                                        initialPage: 0,
+                                        enableInfiniteScroll: true,
+                                        reverse: false,
+                                        autoPlay: true,
+                                        autoPlayInterval:
+                                            const Duration(seconds: 3),
+                                        autoPlayAnimationDuration:
+                                            const Duration(milliseconds: 800),
+                                        autoPlayCurve: Curves.fastOutSlowIn,
+                                        enlargeCenterPage: true,
+                                        enlargeFactor: 0.3,
+                                        scrollDirection: Axis.horizontal,
+                                      )),
+                                ),
+                              )
                             ],
                           ),
                         ),

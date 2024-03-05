@@ -87,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                       margin: const EdgeInsets.only(
                         top: 30,
                       ),
-                      child: Text('or'),
+                      child: const Text('or'),
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 30),
@@ -143,12 +143,90 @@ class LoginScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                         onTap: () {
-                          // if (c.formKey.currentState!.validate()) {
-                          //   Get.to(() => const OtpScreen());
-                          // }
-                          // c.getLogin(c.empID.text.toString(),
-                          //     c.empPassword.text.toString());
-                          c.getLogin('RCTD0478', '9492265601');
+                          if(c.checkValue == true){
+                            if (c.empID.text.toString().isEmpty &&
+                                c.empPassword.text.toString().isEmpty) {
+                              if (c.empMobile.text.toString().isEmpty) {
+                                Get.snackbar('Alert', 'Mobile Number Required',
+                                    messageText: const Text(
+                                      'Mobile Number Required',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white),
+                                    ),
+                                    titleText: const Text('Alert',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white)),
+                                    backgroundColor: Colors.deepPurple,
+                                    barBlur: 3,
+                                    colorText: Colors.black,
+                                    animationDuration:
+                                    const Duration(seconds: 3));
+                              } else if (c.empMobile.text.toString().length >
+                                  10 ||
+                                  c.empMobile.text.toString().length < 10) {
+                                Get.snackbar('Alert', 'Enter Valid Mobile Number',
+                                    messageText: const Text(
+                                      'Enter Valid Mobile Number',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white),
+                                    ),
+                                    titleText: const Text('Alert',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white)),
+                                    backgroundColor: Colors.deepPurple,
+                                    barBlur: 3,
+                                    colorText: Colors.black,
+                                    animationDuration:
+                                    const Duration(seconds: 3));
+                              }else{
+                                c.getOTP(c.empMobile.text.toString());
+                              }
+                            } else {
+                              if (c.empID.text.toString().isNotEmpty &&
+                                  c.empPassword.text.toString().isNotEmpty) {
+                                // c.getLogin(c.empID.text.toString(),c.empPassword.text.toString());
+                                c.getLogin('RCTD0478', '9492265601');
+                              }else{
+                                Get.snackbar('Alert', 'Credentials Required',
+                                    messageText: const Text(
+                                      'Credentials Required',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white),
+                                    ),
+                                    titleText: const Text('Alert',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white)),
+                                    backgroundColor: Colors.deepPurple,
+                                    barBlur: 3,
+                                    colorText: Colors.black,
+                                    animationDuration:
+                                    const Duration(seconds: 3));
+                              }
+                            }
+                          }else{
+                            Get.snackbar('Alert', 'Accept Terms & Conditions',
+                                messageText: const Text(
+                                  'Accept Terms & Conditions',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white),
+                                ),
+                                titleText: const Text('Alert',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white)),
+                                backgroundColor: Colors.deepPurple,
+                                barBlur: 3,
+                                colorText: Colors.black,
+                                animationDuration:
+                                const Duration(seconds: 3));
+                          }
                         },
                         child: Container(
                             margin: const EdgeInsets.only(top: 20),

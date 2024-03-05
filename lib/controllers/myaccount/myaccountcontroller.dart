@@ -1,10 +1,12 @@
-import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyAccountController extends GetxController {
-  String userName = '', empID = '', serviceReqCount = '', mobNum = '',empDesignation ='';
-
+  String userName = '';
+  String empID = '';
+  String serviceReqCount = '';
+  String mobNum = '';
+  String empDesignation = '';
 
   @override
   void onInit() {

@@ -1,6 +1,9 @@
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
+import 'package:rctism/views/login/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../views/pdprofile/pdprofile.dart';
 
 class HomeScreenController extends GetxController {
   final advancedDrawerController = AdvancedDrawerController();
@@ -11,11 +14,27 @@ class HomeScreenController extends GetxController {
     {'id': '3', 'name': 'Education', 'image': 'assets/icons/educationicon.png'},
     {'id': '4', 'name': 'Medical', 'image': 'assets/icons/healthicon.png'},
     {'id': '5', 'name': 'Plant', 'image': 'assets/icons/planticon.png'},
-    {'id': '6', 'name': 'Skill Development', 'image': 'assets/icons/skillicon.png'},
-    {'id': '7', 'name': 'Financial Assistance', 'image': 'assets/icons/financeicon.png'},
-    {'id': '8', 'name': 'Family Counselling', 'image': 'assets/icons/coupleicon.png'},
+    {
+      'id': '6',
+      'name': 'Skill Development',
+      'image': 'assets/icons/skillicon.png'
+    },
+    {
+      'id': '7',
+      'name': 'Financial Assistance',
+      'image': 'assets/icons/financeicon.png'
+    },
+    {
+      'id': '8',
+      'name': 'Family Counselling',
+      'image': 'assets/icons/coupleicon.png'
+    },
     {'id': '9', 'name': 'Motivational', 'image': 'assets/icons/skillicon.png'},
-    {'id': '10', 'name': 'Oldage Homes', 'image': 'assets/icons/oldmanicon.png'},
+    {
+      'id': '10',
+      'name': 'Oldage Homes',
+      'image': 'assets/icons/oldmanicon.png'
+    },
   ];
 
   @override
@@ -24,12 +43,20 @@ class HomeScreenController extends GetxController {
     setData();
   }
 
+
   setData() async {
     SharedPreferences userPref = await SharedPreferences.getInstance();
     userName = "${userPref.getString('empName').toString().trim()} "
         " ${userPref.getString('empSurname').toString()}";
     empID = userPref.getString('empCode').toString();
     mobNum = userPref.getString('empMobNum').toString();
+    update();
+  }
+
+  clearData() async {
+    SharedPreferences userPref = await SharedPreferences.getInstance();
+    userPref.clear();
+    Get.offAll(()=>const LoginScreen());
     update();
   }
 }

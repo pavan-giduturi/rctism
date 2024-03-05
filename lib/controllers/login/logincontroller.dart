@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../apiservice/restapi.dart';
-import '../../views/home/homescreen.dart';
+import '../../views/myaccount/myaccount.dart';
+import '../../views/otpscreen/otpscreen.dart';
 
 class LoginController extends GetxController {
   TextEditingController empID = TextEditingController();
@@ -43,12 +44,55 @@ class LoginController extends GetxController {
             barBlur: 3,
             colorText: Colors.black,
             animationDuration: const Duration(seconds: 3));
-        // Get.to(() => const OtpScreen());
-        Get.offAll(() => const HomeScreen());
+        Get.offAll(() => const MyAccount());
       } else {
         Get.snackbar('Alert', 'Login Failed Invalid data',
             messageText: const Text(
               'Login Failed Invalid data',
+              style:
+                  TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+            ),
+            titleText: const Text('Alert',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white)),
+            backgroundColor: Colors.deepPurple,
+            barBlur: 20,
+            overlayBlur: 5,
+            colorText: Colors.black,
+            animationDuration: const Duration(seconds: 3));
+        log('error');
+      }
+      update();
+    });
+  }
+
+  getOTP(empMobNum) async {
+    log(empMobNum.toString());
+    log('-----------------------');
+    await ApiService.getOTP("login", empMobNum).then((success) {
+      var responseBody = json.decode(success);
+      log(responseBody.toString());
+
+      log(responseBody.toString());
+      if (responseBody['status'].toString() == 'true') {
+        Get.snackbar('Alert', 'OTP has been sent successfully',
+            messageText: const Text(
+              'OTP has been sent successfully',
+              style:
+                  TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+            ),
+            titleText: const Text('Alert',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white)),
+            backgroundColor: Colors.deepPurple,
+            barBlur: 3,
+            colorText: Colors.black,
+            animationDuration: const Duration(seconds: 3));
+        Get.to(() => const OtpScreen(),arguments: responseBody);
+      } else {
+        Get.snackbar('Alert', 'OTP sending failed',
+            messageText: const Text(
+              'OTP sending failed',
               style:
                   TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
             ),

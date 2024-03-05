@@ -85,7 +85,9 @@ class AadhaarCapture extends StatelessWidget {
                             ),
                           ),
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   GestureDetector(
                     onTap: () {
                       e.backImageDialog();

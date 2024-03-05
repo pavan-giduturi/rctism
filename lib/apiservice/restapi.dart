@@ -17,9 +17,9 @@ class ApiService {
         'Authorization': 'b8416f2680eb194d61b33f9909f94b9d',
         'Content-Type': 'application/json'
       });
-      print(HttpHeaders.requestHeaders);
-      print('${Url.baseUrl}/$url');
-      print(response.statusCode);
+      log(HttpHeaders.requestHeaders.toString());
+      log('${Url.baseUrl}/$url');
+      log(response.statusCode.toString());
       return response;
     } catch (e) {
       return e;
@@ -60,6 +60,160 @@ class ApiService {
 
     request.fields["inputEmpCode"] = empCode;
     request.fields["inputEmpPwd"] = empPassword;
+
+    http.StreamedResponse response = await request.send();
+
+    return response.stream.bytesToString();
+  }
+
+  static Future<String> getOTP(
+      String url,
+      String empMobNumber,
+      ) async {
+    var postUri = Uri.parse('${Url.baseUrl}/$url');
+    log(postUri.toString());
+    log(Url.apiToken.toString());
+    http.MultipartRequest request = http.MultipartRequest("POST", postUri);
+
+    Map<String, String> headers = {
+      "Content-Type": "multipart/form-data",
+      "Authorization": "Bearer ${Url.apiToken}"
+    };
+
+    request.headers.addAll(headers);
+
+    request.fields["inputEmpMobile"] = empMobNumber;
+
+    http.StreamedResponse response = await request.send();
+
+    return response.stream.bytesToString();
+  }
+
+  static Future<String> verifyOTP(
+      String url,
+      String empMobNumber,
+      String empOTP,
+      String empCode,
+      ) async {
+    var postUri = Uri.parse('${Url.baseUrl}/$url');
+    log(postUri.toString());
+    log(Url.apiToken.toString());
+    http.MultipartRequest request = http.MultipartRequest("POST", postUri);
+
+    Map<String, String> headers = {
+      "Content-Type": "multipart/form-data",
+      "Authorization": "Bearer ${Url.apiToken}"
+    };
+
+    request.headers.addAll(headers);
+
+    request.fields["inputEmpMobile"] = empMobNumber;
+    request.fields["inputEmpOTP"] = empOTP;
+    request.fields["inputEmpCode"] = empCode;
+
+    http.StreamedResponse response = await request.send();
+
+    return response.stream.bytesToString();
+  }
+
+  static Future<String> getProfileData(
+      String url,
+      String empCode,
+      ) async {
+    var postUri = Uri.parse('${Url.baseUrl}/$url');
+    log(postUri.toString());
+    log(Url.apiToken.toString());
+    http.MultipartRequest request = http.MultipartRequest("POST", postUri);
+
+    Map<String, String> headers = {
+      "Content-Type": "multipart/form-data",
+      "Authorization": "Bearer ${Url.apiToken}"
+    };
+
+    request.headers.addAll(headers);
+
+    request.fields["inputEmpCode"] = empCode;
+
+    http.StreamedResponse response = await request.send();
+
+    return response.stream.bytesToString();
+  }
+
+  static Future<String> submitServiceRequest(
+    String url,
+    String empCode,
+    String empUserId,
+    String empRoleType,
+    String empID,
+    String requestType,
+    String recipientName,
+    String recipientSurName,
+    String recipientGender,
+    String recipientSonOf,
+    String guardianName,
+    String mobNumber,
+    String altMobNum,
+    String recipientDOB,
+    String aadhaarNum,
+    String doorNum,
+    String streetName,
+    String villageName,
+    String mandalName,
+    String stateID,
+    String districtID,
+    String pinCode,
+    String actionType,
+    String cultivationType,
+    String acresID,
+    String centsID,
+    String voterID,
+    String addedBy,
+    String photoPath,
+    String fullphotoPath,
+  ) async {
+    var postUri = Uri.parse('${Url.baseUrl}/$url');
+    log(postUri.toString());
+    log(Url.apiToken.toString());
+    http.MultipartRequest request = http.MultipartRequest("POST", postUri);
+
+    Map<String, String> headers = {
+      "Content-Type": "multipart/form-data",
+      "Authorization": "Bearer ${Url.apiToken}"
+    };
+
+    request.headers.addAll(headers);
+
+    request.fields["inputEmpCode"] = empCode;
+    request.fields["user_id"] = empUserId;
+    request.fields["role_type"] = empRoleType;
+    request.fields["emp_id"] = empID;
+    request.fields["req_type"] = requestType;
+    request.fields["recp_name"] = recipientName;
+    request.fields["recp_surname"] = recipientSurName;
+    request.fields["gender"] = recipientGender;
+    request.fields["rel_ms"] = recipientSonOf;
+    request.fields["gardian_name"] = guardianName;
+    request.fields["phone_no"] = mobNumber;
+    request.fields["alt_no"] = altMobNum;
+    request.fields["dob"] = recipientDOB;
+    request.fields["aadhaar_no"] = aadhaarNum;
+    request.fields["door_no"] = doorNum;
+    request.fields["street"] = streetName;
+    request.fields["village"] = villageName;
+    request.fields["mandal"] = mandalName;
+    request.fields["state_id"] = stateID;
+    request.fields["district"] = districtID;
+    request.fields["pincode"] = pinCode;
+    request.fields["action_type"] = actionType;
+    request.fields["cult_type"] = cultivationType;
+    request.fields["acres"] = acresID;
+    request.fields["cents"] = centsID;
+    request.fields["voter_id"] = voterID;
+    request.fields["added_by"] = addedBy;
+
+    request.files.add(await http.MultipartFile.fromPath('photo', photoPath));
+    request.files
+        .add(await http.MultipartFile.fromPath('full_photo', fullphotoPath));
 
     http.StreamedResponse response = await request.send();
 
