@@ -1,10 +1,12 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rctism/views/identitycapture/identitycapturescreen.dart';
+import 'package:rctism/helpers/utilities.dart';
 
 import '../../controllers/servicerequestforms/servicerequestform2controller.dart';
+import '../identitycapture/identitycapturescreen.dart';
 
 class ServiceRequestForm2 extends StatelessWidget {
   const ServiceRequestForm2({super.key});
@@ -459,36 +461,54 @@ class ServiceRequestForm2 extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      TextFormField(
-                        controller: e.streetController,
-                        style: const TextStyle(color: Colors.black),
+                      DropdownButtonFormField(
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFf1f1f1),
                               ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(10))),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFf1f1f1),
                               ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(10))),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFf1f1f1),
                               ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(10))),
                           fillColor: Color(0xFFf1f1f1),
                           filled: true,
                         ),
+                        isDense: true,
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                        ),
+                        iconSize: 30,
+                        items: e.statesList.map((item) {
+                          return DropdownMenuItem(
+                            value: item['id'].toString(),
+                            child: Text(
+                              item['name'],
+                              style: const TextStyle(
+                                  color: Colors.black),
+                            ),
+                          );
+                        }).toList(),
+                        value: e.stateDropDownValue,
                         validator: (value) {
-                          if (value.toString().isEmpty) {
-                            return 'State Name is required';
+                          if (value == null || value.isEmpty) {
+                            return 'Field is required';
                           }
                           return null;
+                        },
+                        onChanged: (value) {
+                          log('Selected Value is $value');
+                          e.stateDropDownValue = value.toString();
                         },
                       ),
                       const SizedBox(
@@ -502,36 +522,54 @@ class ServiceRequestForm2 extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      TextFormField(
-                        controller: e.districtController,
-                        style: const TextStyle(color: Colors.black),
+                      DropdownButtonFormField(
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFf1f1f1),
                               ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(10))),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFf1f1f1),
                               ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(10))),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFf1f1f1),
                               ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(10))),
                           fillColor: Color(0xFFf1f1f1),
                           filled: true,
                         ),
+                        isDense: true,
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                        ),
+                        iconSize: 30,
+                        items: e.districtList.map((item) {
+                          return DropdownMenuItem(
+                            value: item['id'].toString(),
+                            child: Text(
+                              item['name'],
+                              style: const TextStyle(
+                                  color: Colors.black),
+                            ),
+                          );
+                        }).toList(),
+                        value: e.districtDropDownValue,
                         validator: (value) {
-                          if (value.toString().isEmpty) {
-                            return 'District Name is required';
+                          if (value == null || value.isEmpty) {
+                            return 'Field is required';
                           }
                           return null;
+                        },
+                        onChanged: (value) {
+                          log('Selected Value is $value');
+                          e.districtDropDownValue = value.toString();
                         },
                       ),
                       const SizedBox(
@@ -629,10 +667,25 @@ class ServiceRequestForm2 extends StatelessWidget {
           ),
           bottomNavigationBar: GestureDetector(
               onTap: () {
-                // if (e.formKey.currentState!.validate()) {
-                  log('next');
-                  Get.to(()=>const IdentityCapture());
-                // }
+                if (e.formKey.currentState!.validate()) {
+                  Utilities.form2List = {};
+                  Utilities.form2List = jsonEncode({
+                    "aadhaarNumber" : e.aadhaarNumController.text.toString(),
+                    "cultivationType" : e.cultivationTypeController.text.toString(),
+                    "landExtent" : e.extentDropDownValue.toString(),
+                    "landCents" : e.centsDropDownValue.toString(),
+                    "doorNum" : e.doorNumController.text.toString(),
+                    "streetName" : e.streetController.text.toString(),
+                    "villageName" : e.villageController.text.toString(),
+                    "mandalName" : e.mandalNameController.text.toString(),
+                    "stateID" : e.stateDropDownValue.toString(),
+                    "districtID" : e.districtDropDownValue.toString(),
+                    "pinCode" : e.pinCodeController.text.toString(),
+                    "voterID" : e.voterIdController.text.toString(),
+                  });
+                  log(Utilities.form2List.toString());
+                  Get.to(()=>const IdentityCapture(),);
+                }
               },
               child: Container(
                   margin: const EdgeInsets.only(

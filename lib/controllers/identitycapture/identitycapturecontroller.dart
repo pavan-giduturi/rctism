@@ -10,6 +10,13 @@ class IdentityCaptureController extends GetxController {
   final ImagePicker _picker = ImagePicker();
   File? image, selectedImage;
 
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    log('forms data');
+  }
+
   imageDialog() {
     Get.defaultDialog(
       title: "Capture Identity",

@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rctism/helpers/utilities.dart';
 import 'package:rctism/views/servicerequestforms/servicerequestform2.dart';
 
 import '../../controllers/servicerequestforms/servicerequestform1controller.dart';
@@ -351,8 +353,9 @@ class ServiceRequestForm1 extends StatelessWidget {
           ),
           bottomNavigationBar: GestureDetector(
               onTap: () {
-                // if(e.formKey.currentState!.validate()){
-                  var formData = {
+                if(e.formKey.currentState!.validate()){
+                  Utilities.form1List = {};
+                  Utilities.form1List =jsonEncode( {
                     "recipientName" : e.recipientController.text.toString(),
                     "recipientSurname" : e.surNameController.text.toString(),
                     "recipientSonOf" : e.sonOfController.text.toString(),
@@ -360,11 +363,12 @@ class ServiceRequestForm1 extends StatelessWidget {
                     "recipientGender" : e.genderController.text.toString(),
                     "recipientMobNumber" : e.mobNumController.text.toString(),
                     "recipientAltMobNumber" : e.altMobNumController.text.toString(),
-                  };
-                  log(formData.toString());
+                    "requestType" : e.argumentData,
+                  });
+                  log(Utilities.form1List.toString());
                   log('next');
-                  Get.to(()=>const ServiceRequestForm2(),arguments: formData);
-                // }
+                  Get.to(()=>const ServiceRequestForm2());
+                }
               },
               child: Container(
                   margin: const EdgeInsets.only(

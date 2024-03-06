@@ -4,6 +4,10 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rctism/helpers/utilities.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../apiservice/restapi.dart';
 
 class AadhaarCaptureController extends GetxController{
 
@@ -234,5 +238,52 @@ class AadhaarCaptureController extends GetxController{
       log("Error Occurred ${e.toString()}");
     }
     update();
+  }
+
+  submitServiceRequestForm()async{
+    SharedPreferences userPref = await SharedPreferences.getInstance();
+    var empCode = userPref.getString('empCode').toString();
+    var userID = userPref.getString('userID').toString();
+    var roleType = userPref.getString('userID').toString();
+    var form1Data = jsonDecode(Utilities.form1List);
+    var form2Data = jsonDecode(Utilities.form2List);
+    var identityCaptureData = jsonDecode(Utilities.identityCaptureList);
+    var aadhaarCaptureData = jsonDecode(Utilities.aadhaarCaptureList);
+    log('-----------------------');
+    log(empCode.toString());
+    log(userID.toString());
+    log(roleType.toString());
+    log('-----------------------');
+    log('-----------------------');
+    log(form1Data.toString());
+    log(form2Data.toString());
+    log(identityCaptureData.toString());
+    log(aadhaarCaptureData.toString());
+    log('-----------------------');
+    // await ApiService.submitServiceRequest("service_request/add",empCode,).then((success) {
+    //   var responseBody = json.decode(success);
+    //   log(responseBody.toString());
+    //   if (responseBody['status'].toString() == 'true') {
+    //     profileData = responseBody['profile'];
+    //     log(profileData.toString());
+    //   } else {
+    //     Get.snackbar('Alert', 'Error Occured',
+    //         messageText: const Text(
+    //           'Error Occured',
+    //           style:
+    //           TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+    //         ),
+    //         titleText: const Text('Alert',
+    //             style: TextStyle(
+    //                 fontWeight: FontWeight.bold, color: Colors.white)),
+    //         backgroundColor: Colors.deepPurple,
+    //         barBlur: 20,
+    //         overlayBlur: 5,
+    //         colorText: Colors.black,
+    //         animationDuration: const Duration(seconds: 3));
+    //     log('error');
+    //   }
+    //   update();
+    // });
   }
 }

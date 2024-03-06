@@ -1,7 +1,10 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rctism/helpers/utilities.dart';
 import 'package:rctism/views/adhaarcapture/adhaarcapture.dart';
 import '../../controllers/identitycapture/identitycapturecontroller.dart';
 
@@ -109,6 +112,13 @@ class IdentityCapture extends StatelessWidget {
                           )
                         : GestureDetector(
                             onTap: () {
+                              Utilities.identityCaptureList = {};
+                              Utilities.identityCaptureList = jsonEncode({
+                                'filePath':e.paths[0].toString(),
+                                'fileName':e.names[0].toString(),
+                                'fileBase64':e.baseImg[0].toString(),
+                              });
+                              log(Utilities.identityCaptureList.toString());
                               Get.to(()=>const AadhaarCapture());
                             },
                             child: Container(

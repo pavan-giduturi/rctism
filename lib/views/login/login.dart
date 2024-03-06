@@ -147,7 +147,7 @@ class LoginScreen extends StatelessWidget {
                             if (c.empID.text.toString().isEmpty &&
                                 c.empPassword.text.toString().isEmpty) {
                               if (c.empMobile.text.toString().isEmpty) {
-                                Get.snackbar('Alert', 'Mobile Number Required',
+                                Get.snackbar('Alert', 'Credentials Required',
                                     messageText: const Text(
                                       'Mobile Number Required',
                                       style: TextStyle(
@@ -188,8 +188,8 @@ class LoginScreen extends StatelessWidget {
                             } else {
                               if (c.empID.text.toString().isNotEmpty &&
                                   c.empPassword.text.toString().isNotEmpty) {
-                                // c.getLogin(c.empID.text.toString(),c.empPassword.text.toString());
-                                c.getLogin('RCTD0478', '9492265601');
+                                c.getLogin(c.empID.text.toString(),c.empPassword.text.toString());
+                                // c.getLogin('RCTD0478', '9492265601');
                               }else{
                                 Get.snackbar('Alert', 'Credentials Required',
                                     messageText: const Text(
@@ -238,7 +238,7 @@ class LoginScreen extends StatelessWidget {
                                     BorderRadius.all(Radius.circular(30))),
                             padding: const EdgeInsets.all(8),
                             child: const Text(
-                              'CONTINUE',
+                              'LOGIN',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.white,

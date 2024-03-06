@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class ServiceRequestForm2Controller extends GetxController {
-  dynamic form1Data = Get.arguments;
   final formKey = GlobalKey<FormState>();
   final TextEditingController aadhaarNumController = TextEditingController();
   final TextEditingController cultivationTypeController =
@@ -22,6 +21,11 @@ class ServiceRequestForm2Controller extends GetxController {
     {'id': '1', 'name': 'Acres'}
   ];
 
+  List statesList = [
+    {'id': '1', 'name': 'Andhra Pradesh'},
+    {'id': '2', 'name': 'Telangana'},
+  ];
+  String? stateDropDownValue;
   String? extentDropDownValue;
   List centsList = [
     {'id': '1', 'name': 'Cents'}
@@ -29,11 +33,15 @@ class ServiceRequestForm2Controller extends GetxController {
 
   String? centsDropDownValue;
 
+  List districtList = [
+    {'id': '1', 'name': 'Visakhapatnam'},
+    {'id': '2', 'name': 'Vijayanagar'},
+  ];
+  String? districtDropDownValue;
+
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    log('arumnet data');
-    log(form1Data.toString());
   }
 }

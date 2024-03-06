@@ -1,8 +1,11 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/adhaarcapture/aadhaarcapturecontroller.dart';
+import '../../helpers/utilities.dart';
 
 class AadhaarCapture extends StatelessWidget {
   const AadhaarCapture({super.key});
@@ -139,7 +142,19 @@ class AadhaarCapture extends StatelessWidget {
                           ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Utilities.aadhaarCaptureList={};
+                      Utilities.aadhaarCaptureList = jsonEncode({
+                        'fileFrontPath':e.paths[0].toString(),
+                        'fileFrontName':e.names[0].toString(),
+                        'fileFrontBase64':e.baseImg[0].toString(),
+                        'fileBackPath':e.backPaths[0].toString(),
+                        'fileBackName':e.backNames[0].toString(),
+                        'fileBackBase64':e.backBaseImg[0].toString(),
+                      });
+                      log(Utilities.aadhaarCaptureList.toString());
+                      e.submitServiceRequestForm();
+                    },
                     child: Container(
                         margin: const EdgeInsets.only(top: 30),
                         alignment: Alignment.center,
