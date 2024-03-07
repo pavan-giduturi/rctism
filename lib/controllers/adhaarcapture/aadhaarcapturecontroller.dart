@@ -9,13 +9,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../apiservice/restapi.dart';
 
-class AadhaarCaptureController extends GetxController{
-
+class AadhaarCaptureController extends GetxController {
   List names = [], paths = [], baseImg = [];
   final ImagePicker _picker = ImagePicker();
   File? frontImage, frontSelectedImage;
   List backNames = [], backPaths = [], backBaseImg = [];
   File? backImage, backSelectedImage;
+  List serviceRequestResponse = [];
 
   frontImageDialog() {
     Get.defaultDialog(
@@ -178,8 +178,8 @@ class AadhaarCaptureController extends GetxController{
   }
 
   frontTakePhoto(
-      ImageSource source,
-      ) async {
+    ImageSource source,
+  ) async {
     names = [];
     paths = [];
     baseImg = [];
@@ -208,10 +208,9 @@ class AadhaarCaptureController extends GetxController{
     update();
   }
 
-
   backTakePhoto(
-      ImageSource source,
-      ) async {
+    ImageSource source,
+  ) async {
     backNames = [];
     backPaths = [];
     backBaseImg = [];
@@ -240,17 +239,44 @@ class AadhaarCaptureController extends GetxController{
     update();
   }
 
-  submitServiceRequestForm()async{
+  submitServiceRequestForm() async {
     SharedPreferences userPref = await SharedPreferences.getInstance();
     var empCode = userPref.getString('empCode').toString();
+    var empID = userPref.getString('empID').toString();
     var userID = userPref.getString('userID').toString();
-    var roleType = userPref.getString('userID').toString();
+    var roleType = userPref.getString('empRoleType').toString();
     var form1Data = jsonDecode(Utilities.form1List);
     var form2Data = jsonDecode(Utilities.form2List);
     var identityCaptureData = jsonDecode(Utilities.identityCaptureList);
     var aadhaarCaptureData = jsonDecode(Utilities.aadhaarCaptureList);
+    var reqType = form1Data['requestType'];
+    var recipientName = form1Data['recipientName'];
+    var recipientSurName = form1Data['recipientSurname'];
+    var recipientGender = form1Data['recipientGender'];
+    var recipientSonOf = form1Data['recipientSonOf'];
+    var guardianName = form1Data['recipientName'];
+    var mobNumber = form1Data['recipientMobNumber'];
+    var altMobNum = form1Data['recipientAltMobNumber'];
+    var recipientDOB = form1Data['recipientDOB'];
+    var aadhaarNum = form2Data['aadhaarNumber'];
+    var doorNum = form2Data['doorNum'];
+    var streetName = form2Data['streetName'];
+    var villageName = form2Data['villageName'];
+    var mandalName = form2Data['mandalName'];
+    var stateID = form2Data['stateID'];
+    var districtID = form2Data['districtID'];
+    var pinCode = form2Data['districtID'];
+    var actionType = 'new';
+    var cultivationType = form2Data['cultivationType'];
+    var acresID = form2Data['landExtent'];
+    var centsID = form2Data['landCents'];
+    var voterID = form2Data['voterID'];
+    var addedBy = userID;
+    var photoPath = identityCaptureData['filePath'];
+    var fullphotoPath = identityCaptureData['filePath'];
     log('-----------------------');
     log(empCode.toString());
+    log(empID.toString());
     log(userID.toString());
     log(roleType.toString());
     log('-----------------------');
@@ -260,30 +286,61 @@ class AadhaarCaptureController extends GetxController{
     log(identityCaptureData.toString());
     log(aadhaarCaptureData.toString());
     log('-----------------------');
-    // await ApiService.submitServiceRequest("service_request/add",empCode,).then((success) {
-    //   var responseBody = json.decode(success);
-    //   log(responseBody.toString());
-    //   if (responseBody['status'].toString() == 'true') {
-    //     profileData = responseBody['profile'];
-    //     log(profileData.toString());
-    //   } else {
-    //     Get.snackbar('Alert', 'Error Occured',
-    //         messageText: const Text(
-    //           'Error Occured',
-    //           style:
-    //           TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
-    //         ),
-    //         titleText: const Text('Alert',
-    //             style: TextStyle(
-    //                 fontWeight: FontWeight.bold, color: Colors.white)),
-    //         backgroundColor: Colors.deepPurple,
-    //         barBlur: 20,
-    //         overlayBlur: 5,
-    //         colorText: Colors.black,
-    //         animationDuration: const Duration(seconds: 3));
-    //     log('error');
-    //   }
-    //   update();
-    // });
+    await ApiService.submitServiceRequest(
+      "service_request/add",
+      empCode,
+      userID,
+      roleType,
+      empID,
+      reqType,
+      recipientName,
+      recipientSurName,
+      recipientGender,
+      recipientSonOf,
+      guardianName,
+      mobNumber,
+      altMobNum,
+      recipientDOB,
+      aadhaarNum,
+      doorNum,
+      streetName,
+      villageName,
+      mandalName,
+      stateID,
+      districtID,
+      pinCode,
+      actionType,
+      cultivationType,
+      acresID,
+      centsID,
+      voterID,
+      addedBy,
+      photoPath,
+      fullphotoPath,
+    ).then((success) {
+      var responseBody = json.decode(success);
+      log(responseBody.toString());
+      if (responseBody['status'].toString() == 'true') {
+        // serviceRequestResponse = responseBody['profile'];
+        // log(profileData.toString());
+      } else {
+        Get.snackbar('Alert', 'Error Occured',
+            messageText: const Text(
+              'Error Occured',
+              style:
+                  TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+            ),
+            titleText: const Text('Alert',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white)),
+            backgroundColor: Colors.deepPurple,
+            barBlur: 20,
+            overlayBlur: 5,
+            colorText: Colors.black,
+            animationDuration: const Duration(seconds: 3));
+        log('error');
+      }
+      update();
+    });
   }
 }

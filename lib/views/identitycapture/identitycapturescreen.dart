@@ -114,9 +114,9 @@ class IdentityCapture extends StatelessWidget {
                             onTap: () {
                               Utilities.identityCaptureList = {};
                               Utilities.identityCaptureList = jsonEncode({
-                                'filePath':e.paths[0].toString(),
-                                'fileName':e.names[0].toString(),
-                                'fileBase64':e.baseImg[0].toString(),
+                                'filePath':e.paths[0].toString().isEmpty?"":e.paths[0].toString(),
+                                'fileName':e.names[0].toString().isEmpty?"":e.names[0].toString(),
+                                'fileBase64':e.baseImg[0].toString().isEmpty?"":e.baseImg[0].toString().isEmpty,
                               });
                               log(Utilities.identityCaptureList.toString());
                               Get.to(()=>const AadhaarCapture());

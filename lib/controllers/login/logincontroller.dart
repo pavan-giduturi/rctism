@@ -114,6 +114,7 @@ class LoginController extends GetxController {
     SharedPreferences userPref = await SharedPreferences.getInstance();
     userPref.setString("empCode", response["data"]['emp_code'].toString());
     userPref.setString("userID", response["data"]['user_id'].toString());
+    userPref.setString("empID", response["data"]['emp_id'].toString());
     userPref.setString("empName", response["profile"]['name'].toString());
     userPref.setString("empSurname", response['profile']['surname'].toString());
     userPref.setString("empMobNum", response['profile']['mobile'].toString());
@@ -127,6 +128,7 @@ class LoginController extends GetxController {
     log(userPref.getString('empMobNum').toString());
     log(userPref.getString('empRoleType').toString());
     log(userPref.getString('userID').toString());
+    log(userPref.getString('empID').toString());
     log("==================");
   }
 }

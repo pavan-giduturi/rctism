@@ -145,12 +145,12 @@ class AadhaarCapture extends StatelessWidget {
                     onTap: () {
                       Utilities.aadhaarCaptureList={};
                       Utilities.aadhaarCaptureList = jsonEncode({
-                        'fileFrontPath':e.paths[0].toString(),
-                        'fileFrontName':e.names[0].toString(),
-                        'fileFrontBase64':e.baseImg[0].toString(),
-                        'fileBackPath':e.backPaths[0].toString(),
-                        'fileBackName':e.backNames[0].toString(),
-                        'fileBackBase64':e.backBaseImg[0].toString(),
+                        'fileFrontPath':e.paths[0].toString().isEmpty?"":e.paths[0].toString(),
+                        'fileFrontName':e.names[0].toString().isEmpty?"":e.names[0].toString(),
+                        'fileFrontBase64':e.baseImg[0].toString().isEmpty?"":e.baseImg[0].toString(),
+                        'fileBackPath':e.backPaths[0].toString().isEmpty?"":e.backPaths[0].toString(),
+                        'fileBackName':e.backNames[0].toString().isEmpty?"":e.backNames[0].toString(),
+                        'fileBackBase64':e.backBaseImg[0].toString().isEmpty?"":e.backBaseImg[0].toString(),
                       });
                       log(Utilities.aadhaarCaptureList.toString());
                       e.submitServiceRequestForm();
