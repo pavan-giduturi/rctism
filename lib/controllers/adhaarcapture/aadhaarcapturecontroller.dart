@@ -249,31 +249,31 @@ class AadhaarCaptureController extends GetxController {
     var form2Data = jsonDecode(Utilities.form2List);
     var identityCaptureData = jsonDecode(Utilities.identityCaptureList);
     var aadhaarCaptureData = jsonDecode(Utilities.aadhaarCaptureList);
-    var reqType = form1Data['requestType'];
-    var recipientName = form1Data['recipientName'];
-    var recipientSurName = form1Data['recipientSurname'];
-    var recipientGender = form1Data['recipientGender'];
-    var recipientSonOf = form1Data['recipientSonOf'];
-    var guardianName = form1Data['recipientName'];
-    var mobNumber = form1Data['recipientMobNumber'];
-    var altMobNum = form1Data['recipientAltMobNumber'];
-    var recipientDOB = form1Data['recipientDOB'];
-    var aadhaarNum = form2Data['aadhaarNumber'];
-    var doorNum = form2Data['doorNum'];
-    var streetName = form2Data['streetName'];
-    var villageName = form2Data['villageName'];
-    var mandalName = form2Data['mandalName'];
-    var stateID = form2Data['stateID'];
-    var districtID = form2Data['districtID'];
-    var pinCode = form2Data['districtID'];
+    var reqType = form1Data['requestType'].toString();
+    var recipientName = form1Data['recipientName'].toString();
+    var recipientSurName = form1Data['recipientSurname'].toString();
+    var recipientGender = form1Data['recipientGender'].toString();
+    var recipientSonOf = form1Data['recipientSonOf'].toString();
+    var guardianName = form1Data['recipientName'].toString();
+    var mobNumber = form1Data['recipientMobNumber'].toString();
+    var altMobNum = form1Data['recipientAltMobNumber'].toString();
+    var recipientDOB = form1Data['recipientDOB'].toString();
+    var aadhaarNum = form2Data['aadhaarNumber'].toString();
+    var doorNum = form2Data['doorNum'].toString();
+    var streetName = form2Data['streetName'].toString();
+    var villageName = form2Data['villageName'].toString();
+    var mandalName = form2Data['mandalName'].toString();
+    var stateID = form2Data['stateID'].toString();
+    var districtID = form2Data['districtID'].toString();
+    var pinCode = form2Data['districtID'].toString();
     var actionType = 'new';
-    var cultivationType = form2Data['cultivationType'];
-    var acresID = form2Data['landExtent'];
-    var centsID = form2Data['landCents'];
-    var voterID = form2Data['voterID'];
-    var addedBy = userID;
-    var photoPath = identityCaptureData['filePath'];
-    var fullphotoPath = identityCaptureData['filePath'];
+    var cultivationType = form2Data['cultivationType'].toString();
+    var acresID = form2Data['landExtent'].toString();
+    var centsID = form2Data['landCents'].toString();
+    var voterID = form2Data['voterID'].toString();
+    var addedBy = userID.toString();
+    var photoPath = identityCaptureData['filePath'].toString();
+    var fullphotoPath = identityCaptureData['filePath'].toString();
     log('-----------------------');
     log(empCode.toString());
     log(empID.toString());
@@ -320,26 +320,26 @@ class AadhaarCaptureController extends GetxController {
     ).then((success) {
       var responseBody = json.decode(success);
       log(responseBody.toString());
-      if (responseBody['status'].toString() == 'true') {
-        // serviceRequestResponse = responseBody['profile'];
-        // log(profileData.toString());
-      } else {
-        Get.snackbar('Alert', 'Error Occured',
-            messageText: const Text(
-              'Error Occured',
-              style:
-                  TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
-            ),
-            titleText: const Text('Alert',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.white)),
-            backgroundColor: Colors.deepPurple,
-            barBlur: 20,
-            overlayBlur: 5,
-            colorText: Colors.black,
-            animationDuration: const Duration(seconds: 3));
-        log('error');
-      }
+      // if (responseBody['status'].toString() == 'true') {
+      //   // serviceRequestResponse = responseBody['profile'];
+      //   // log(profileData.toString());
+      // } else {
+      //   Get.snackbar('Alert', 'Error Occured',
+      //       messageText: const Text(
+      //         'Error Occured',
+      //         style:
+      //             TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+      //       ),
+      //       titleText: const Text('Alert',
+      //           style: TextStyle(
+      //               fontWeight: FontWeight.bold, color: Colors.white)),
+      //       backgroundColor: Colors.deepPurple,
+      //       barBlur: 20,
+      //       overlayBlur: 5,
+      //       colorText: Colors.black,
+      //       animationDuration: const Duration(seconds: 3));
+      //   log('error');
+      // }
       update();
     });
   }
