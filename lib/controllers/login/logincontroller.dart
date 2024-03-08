@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rctism/helpers/utilities.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../apiservice/restapi.dart';
 import '../../views/myaccount/myaccount.dart';
@@ -115,6 +116,7 @@ class LoginController extends GetxController {
     userPref.setString("empCode", response["data"]['emp_code'].toString());
     userPref.setString("userID", response["data"]['user_id'].toString());
     userPref.setString("empID", response["data"]['emp_id'].toString());
+    userPref.setString("empRole", response['data']['user_role'].toString());
     userPref.setString("empName", response["profile"]['name'].toString());
     userPref.setString("empSurname", response['profile']['surname'].toString());
     userPref.setString("empMobNum", response['profile']['mobile'].toString());
@@ -130,5 +132,16 @@ class LoginController extends GetxController {
     log(userPref.getString('userID').toString());
     log(userPref.getString('empID').toString());
     log("==================");
+    if(response['data']['user_role'].toString() == "pof"){
+      Utilities.isProjectOfficer =true;
+    }else if(response['data']['user_role'].toString() == "pm"){
+      Utilities.isPojectDirector = true;
+    }else if(response['data']['user_role'].toString() == "pm"){
+      Utilities.isPojectDirector = true;
+    }else if(response['data']['user_role'].toString() == "sw"){
+      Utilities.isSocialWorker = true;
+    }else if(response['data']['user_role'].toString() == "srq"){
+      Utilities.isServiceRequest = true;
+    }
   }
 }

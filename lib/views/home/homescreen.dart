@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
 import '../../controllers/home/homecontroller.dart';
+import '../../helpers/utilities.dart';
 import '../pdprofile/pdprofile.dart';
 import '../servicerequestforms/servicerequestform1.dart';
 class HomeScreen extends StatefulWidget {
@@ -85,32 +86,76 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                 ),
-                                ListTile(
-                                  onTap: () {},
-                                  leading: const Icon(
-                                    Icons.groups_rounded,
-                                    color: Color(0xFF503083),
-                                  ),
-                                  title: const Text(
-                                    'My Project Directors',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
+                                Visibility(
+                                  visible: Utilities.isProjectOfficer,
+                                  child: ListTile(
+                                    onTap: () {},
+                                    leading: const Icon(
+                                      Icons.groups_rounded,
+                                      color: Color(0xFF503083),
+                                    ),
+                                    title: const Text(
+                                      'My Project Directors',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
-                                ListTile(
-                                  onTap: () {
-                                    // Get.offAll(() => const SearchVoterId());
-                                  },
-                                  leading: Image.asset(
-                                    'assets/icons/cardsicon.png',
-                                    height: 22,
-                                    width: 22,
+                                Visibility(
+                                  visible: Utilities.isPojectDirector,
+                                  child: ListTile(
+                                    onTap: () {
+                                      // Get.offAll(() => const SearchVoterId());
+                                    },
+                                    leading: Image.asset(
+                                      'assets/icons/cardsicon.png',
+                                      height: 22,
+                                      width: 22,
+                                    ),
+                                    title: const Text(
+                                      'My Social Workers',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                   ),
-                                  title: const Text(
-                                    'My Service Requests',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
+                                ),
+                                Visibility(
+                                  visible: Utilities.isSocialWorker,
+                                  child: ListTile(
+                                    onTap: () {
+                                      // Get.offAll(() => const SearchVoterId());
+                                    },
+                                    leading: Image.asset(
+                                      'assets/icons/cardsicon.png',
+                                      height: 22,
+                                      width: 22,
+                                    ),
+                                    title: const Text(
+                                      'My Service Requests',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: Utilities.isServiceRequest,
+                                  child: ListTile(
+                                    onTap: () {
+                                      // Get.offAll(() => const SearchVoterId());
+                                    },
+                                    leading: Image.asset(
+                                      'assets/icons/cardsicon.png',
+                                      height: 22,
+                                      width: 22,
+                                    ),
+                                    title: const Text(
+                                      'My Service Requests',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
