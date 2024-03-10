@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:rctism/views/login/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../helpers/utilities.dart';
 import '../../views/pdprofile/pdprofile.dart';
 
 class HomeScreenController extends GetxController {
@@ -56,6 +57,10 @@ class HomeScreenController extends GetxController {
   clearData() async {
     SharedPreferences userPref = await SharedPreferences.getInstance();
     userPref.clear();
+    Utilities.isProjectOfficer =false;
+    Utilities.isPojectDirector = false;
+    Utilities.isSocialWorker = false;
+    Utilities.isServiceRequest = false;
     Get.offAll(()=>const LoginScreen());
     update();
   }

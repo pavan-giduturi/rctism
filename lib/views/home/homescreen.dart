@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import '../../controllers/home/homecontroller.dart';
 import '../../helpers/utilities.dart';
 import '../pdprofile/pdprofile.dart';
+import '../profilesdirectory/profileslist.dart';
+import '../profilesdirectory/servicerequestslist.dart';
 import '../servicerequestforms/servicerequestform1.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -89,7 +91,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Visibility(
                                   visible: Utilities.isProjectOfficer,
                                   child: ListTile(
-                                    onTap: () {},
+                                    onTap: () {
+                                      // Get.to(() => const Profileslist(),arguments: responseBody);
+                                      Get.to(() => const Profileslist());
+                                    },
                                     leading: const Icon(
                                       Icons.groups_rounded,
                                       color: Color(0xFF503083),
@@ -106,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   visible: Utilities.isPojectDirector,
                                   child: ListTile(
                                     onTap: () {
-                                      // Get.offAll(() => const SearchVoterId());
+                                      Get.to(() => const Profileslist());
                                     },
                                     leading: Image.asset(
                                       'assets/icons/cardsicon.png',
@@ -125,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   visible: Utilities.isSocialWorker,
                                   child: ListTile(
                                     onTap: () {
-                                      // Get.offAll(() => const SearchVoterId());
+                                      Get.to(() => const ServiceRequestslist());
                                     },
                                     leading: Image.asset(
                                       'assets/icons/cardsicon.png',
@@ -144,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   visible: Utilities.isServiceRequest,
                                   child: ListTile(
                                     onTap: () {
-                                      // Get.offAll(() => const SearchVoterId());
+                                      Get.to(() => const Profileslist());
                                     },
                                     leading: Image.asset(
                                       'assets/icons/cardsicon.png',

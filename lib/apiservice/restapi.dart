@@ -139,6 +139,39 @@ class ApiService {
     return response.stream.bytesToString();
   }
 
+  static Future<String> getProfilesListData(
+      String url,
+      String user_id,
+      String empCode,
+      String role_type,
+      String empID,
+
+      ) async {
+    var postUri = Uri.parse('${Url.baseUrl}/$url');
+    log(postUri.toString());
+    log(Url.apiToken.toString());
+    http.MultipartRequest request = http.MultipartRequest("POST", postUri);
+
+    Map<String, String> headers = {
+      "Content-Type": "multipart/form-data",
+      "Authorization": "Bearer ${Url.apiToken}"
+    };
+
+    request.headers.addAll(headers);
+
+    request.fields["user_id"] = user_id;
+    request.fields["inputEmpCode"] = empCode;
+    request.fields["role_type"] = role_type;
+
+    if(role_type == "pm" || role_type == "sw"){
+      request.fields["emp_id"] = empID;
+    }
+
+    http.StreamedResponse response = await request.send();
+
+    return response.stream.bytesToString();
+  }
+
   static Future<String> submitServiceRequest(
     String url,
     String empCode,
