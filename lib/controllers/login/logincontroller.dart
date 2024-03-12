@@ -121,7 +121,7 @@ class LoginController extends GetxController {
     userPref.setString("empSurname", response['profile']['surname'].toString());
     userPref.setString("empMobNum", response['profile']['mobile'].toString());
     userPref.setString("empRoleType", response['profile']['role'].toString());
-    // userPref.setBool("isLogin", true);
+    userPref.setBool("isLogin", true);
     log("==================");
     // log(response.toString());
     log(userPref.getString('empCode').toString());
@@ -131,6 +131,7 @@ class LoginController extends GetxController {
     log(userPref.getString('empRoleType').toString());
     log(userPref.getString('userID').toString());
     log(userPref.getString('empID').toString());
+    log(userPref.getBool('isLogin').toString());
     log("==================");
     if(response['data']['user_role'].toString() == "pof"){
       Utilities.isProjectOfficer =true;

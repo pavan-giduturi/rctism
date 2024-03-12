@@ -172,6 +172,7 @@ class ApiService {
     return response.stream.bytesToString();
   }
 
+
   static Future<String> submitServiceRequest(
     String url,
     String empCode,
@@ -202,7 +203,8 @@ class ApiService {
     String voterID,
     String addedBy,
     String photoPath,
-    String fullphotoPath,
+    String aadhaarFront,
+    String aadhaarBack,
   ) async {
     var postUri = Uri.parse('${Url.baseUrl}/$url');
     log(postUri.toString());
@@ -244,9 +246,11 @@ class ApiService {
     request.fields["voter_id"] = voterID;
     request.fields["added_by"] = addedBy;
 
-    request.files.add(await http.MultipartFile.fromPath('photo', photoPath));
+    request.files.add(await http.MultipartFile.fromPath('cropped_profile_img', photoPath));
     request.files
-        .add(await http.MultipartFile.fromPath('full_photo', fullphotoPath));
+        .add(await http.MultipartFile.fromPath('aadhar_back', aadhaarBack));
+    request.files
+        .add(await http.MultipartFile.fromPath('aadhar_front', aadhaarFront));
 
     http.StreamedResponse response = await request.send();
 

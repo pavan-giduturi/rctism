@@ -273,7 +273,8 @@ class AadhaarCaptureController extends GetxController {
     var voterID = form2Data['voterID'].toString();
     var addedBy = userID.toString();
     var photoPath = identityCaptureData['filePath'].toString();
-    var fullphotoPath = identityCaptureData['filePath'].toString();
+    var aadhaarFront = aadhaarCaptureData['fileFrontPath'].toString();
+    var aadhaarBack = aadhaarCaptureData['fileBackPath'].toString();
     log('-----------------------');
     log(empCode.toString());
     log(empID.toString());
@@ -316,7 +317,8 @@ class AadhaarCaptureController extends GetxController {
       voterID,
       addedBy,
       photoPath,
-      fullphotoPath,
+      aadhaarFront,
+      aadhaarBack
     ).then((success) {
       var responseBody = json.decode(success);
       log(responseBody.toString());
