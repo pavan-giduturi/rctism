@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rctism/helpers/utilities.dart';
+import 'package:rctism/views/home/homescreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../apiservice/restapi.dart';
@@ -322,26 +323,41 @@ class AadhaarCaptureController extends GetxController {
     ).then((success) {
       var responseBody = json.decode(success);
       log(responseBody.toString());
-      // if (responseBody['status'].toString() == 'true') {
-      //   // serviceRequestResponse = responseBody['profile'];
-      //   // log(profileData.toString());
-      // } else {
-      //   Get.snackbar('Alert', 'Error Occured',
-      //       messageText: const Text(
-      //         'Error Occured',
-      //         style:
-      //             TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
-      //       ),
-      //       titleText: const Text('Alert',
-      //           style: TextStyle(
-      //               fontWeight: FontWeight.bold, color: Colors.white)),
-      //       backgroundColor: Colors.deepPurple,
-      //       barBlur: 20,
-      //       overlayBlur: 5,
-      //       colorText: Colors.black,
-      //       animationDuration: const Duration(seconds: 3));
-      //   log('error');
-      // }
+      if (responseBody['status'].toString() == 'true') {
+        // serviceRequestResponse = responseBody;
+        // log(serviceRequestResponse.toString());
+        Get.snackbar('Success', 'New Service Request Submitted Successfully',
+            messageText: const Text(
+              'New Service Request Submitted Successfully',
+              style:
+              TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+            ),
+            titleText: const Text('Success',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white)),
+            backgroundColor: Colors.deepPurple,
+            barBlur: 20,
+            overlayBlur: 5,
+            colorText: Colors.black,
+            animationDuration: const Duration(seconds: 3));
+        Get.offAll(()=>const HomeScreen());
+      } else {
+        Get.snackbar('Alert', 'Error Occured',
+            messageText: const Text(
+              'Error Occured',
+              style:
+                  TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+            ),
+            titleText: const Text('Alert',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white)),
+            backgroundColor: Colors.deepPurple,
+            barBlur: 20,
+            overlayBlur: 5,
+            colorText: Colors.black,
+            animationDuration: const Duration(seconds: 3));
+        log('error');
+      }
       update();
     });
   }

@@ -222,8 +222,8 @@ class ApiService {
     request.fields["user_id"] = empUserId;
     request.fields["role_type"] = empRoleType;
     request.fields["emp_id"] = empID;
-    // request.fields["req_type"] = requestType;
-    request.fields["req_type"] = "1";
+    request.fields["req_type"] = requestType;
+    // request.fields["req_type"] = "1";
     request.fields["recp_name"] = recipientName;
     request.fields["recp_surname"] = recipientSurName;
     request.fields["gender"] = recipientGender;
@@ -231,8 +231,8 @@ class ApiService {
     request.fields["gardian_name"] = guardianName;
     request.fields["phone_no"] = mobNumber;
     request.fields["alt_no"] = altMobNum;
-    request.fields["dob"] = "2023-06-29";
-    // request.fields["dob"] = recipientDOB;
+    // request.fields["dob"] = "2023-06-29";
+    request.fields["dob"] = recipientDOB;
     request.fields["aadhaar_no"] = aadhaarNum;
     request.fields["door_no"] = doorNum;
     request.fields["street"] = streetName;
@@ -248,8 +248,8 @@ class ApiService {
     request.fields["voter_id"] = voterID;
     request.fields["added_by"] = addedBy;
 
-    print("request.fields");
-    print(request.fields);
+    log("request.fields");
+    log(request.fields.toString());
 
     request.files.add(await http.MultipartFile.fromPath('profile_img', photoPath));
     request.files.add(await http.MultipartFile.fromPath('cropped_profile_img', photoPath));
@@ -258,8 +258,8 @@ class ApiService {
     request.files
         .add(await http.MultipartFile.fromPath('aadhar_front', aadhaarFront));
 
-    print("request.files");
-    print(request.files);
+    log("request.files");
+    log(request.files.toString());
 
     http.StreamedResponse response = await request.send();
 

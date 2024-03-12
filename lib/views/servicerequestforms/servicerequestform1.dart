@@ -57,28 +57,29 @@ class ServiceRequestForm1 extends StatelessWidget {
                         controller: e.recipientController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            fillColor: Color(0xFFf1f1f1),
-                            filled: true,),
-                        validator: (value){
-                          if(value.toString().isEmpty){
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          fillColor: Color(0xFFf1f1f1),
+                          filled: true,
+                        ),
+                        validator: (value) {
+                          if (value.toString().isEmpty) {
                             return 'Recipient Name is required';
                           }
                           return null;
@@ -99,28 +100,29 @@ class ServiceRequestForm1 extends StatelessWidget {
                         controller: e.surNameController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            fillColor: Color(0xFFf1f1f1),
-                            filled: true,),
-                        validator: (value){
-                          if(value.toString().isEmpty){
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          fillColor: Color(0xFFf1f1f1),
+                          filled: true,
+                        ),
+                        validator: (value) {
+                          if (value.toString().isEmpty) {
                             return 'SurName is required';
                           }
                           return null;
@@ -141,28 +143,29 @@ class ServiceRequestForm1 extends StatelessWidget {
                         controller: e.sonOfController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            fillColor: Color(0xFFf1f1f1),
-                            filled: true,),
-                        validator: (value){
-                          if(value.toString().isEmpty){
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          fillColor: Color(0xFFf1f1f1),
+                          filled: true,
+                        ),
+                        validator: (value) {
+                          if (value.toString().isEmpty) {
                             return 'S/o. D/o, W/o is required';
                           }
                           return null;
@@ -180,37 +183,105 @@ class ServiceRequestForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        onTap: () {
+                          e.datePicker(context);
+                        },
+                        readOnly: true,
                         controller: e.dobController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            fillColor: Color(0xFFf1f1f1),
-                            filled: true,
-                            hintText: 'DDMMYYYY'),
-                        validator: (value){
-                          if(value.toString().isEmpty){
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          fillColor: Color(0xFFf1f1f1),
+                          filled: true,
+                          hintText: 'DDMMYYYY',
+                          suffixIcon: Icon(Icons.calendar_month),
+                        ),
+                        validator: (value) {
+                          if (value.toString().isEmpty) {
                             return 'DOB is required';
-                          }else if(value.toString().length<8){
+                          } else if (value.toString().length < 8) {
                             return 'Enter Valid DOB in DDMMYYYY format';
                           }
                           return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
+                        'Service Type*',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      DropdownButtonFormField(
+                        style: const TextStyle(fontSize: 12,fontWeight: FontWeight.w400),
+                        isExpanded: true,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          fillColor: Color(0xFFf1f1f1),
+                          filled: true,
+                        ),
+                        isDense: true,
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                        ),
+                        iconSize: 30,
+                        items: e.serviceReqTypes.map((item) {
+                          return DropdownMenuItem(
+                            value: item['id'].toString(),
+                            child: Text(
+                              item['name'],
+                              style: const TextStyle(color: Colors.black),
+                            ),
+                          );
+                        }).toList(),
+                        value: e.serviceTypeDropDownValue,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Field is required';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) {
+                          log('Selected Value is $value');
+                          e.serviceTypeDropDownValue = value.toString();
                         },
                       ),
                       const SizedBox(
@@ -228,28 +299,29 @@ class ServiceRequestForm1 extends StatelessWidget {
                         controller: e.genderController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            fillColor: Color(0xFFf1f1f1),
-                            filled: true,),
-                        validator: (value){
-                          if(value.toString().isEmpty){
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          fillColor: Color(0xFFf1f1f1),
+                          filled: true,
+                        ),
+                        validator: (value) {
+                          if (value.toString().isEmpty) {
                             return 'Gender is required';
                           }
                           return null;
@@ -271,31 +343,33 @@ class ServiceRequestForm1 extends StatelessWidget {
                         keyboardType: TextInputType.phone,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            fillColor: Color(0xFFf1f1f1),
-                            filled: true,),
-                        validator: (value){
-                          if(value.toString().isEmpty){
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          fillColor: Color(0xFFf1f1f1),
+                          filled: true,
+                        ),
+                        validator: (value) {
+                          if (value.toString().isEmpty) {
                             return 'Mobile Number is required';
-                          }else if(value.toString().length<10 || value.toString().length>10){
-                          return 'Enter valid Mobile Number';
+                          } else if (value.toString().length < 10 ||
+                              value.toString().length > 10) {
+                            return 'Enter valid Mobile Number';
                           }
                           return null;
                         },
@@ -316,30 +390,32 @@ class ServiceRequestForm1 extends StatelessWidget {
                         controller: e.altMobNumController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                            fillColor: Color(0xFFf1f1f1),
-                            filled: true,),
-                        validator: (value){
-                          if(value.toString().isEmpty){
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          fillColor: Color(0xFFf1f1f1),
+                          filled: true,
+                        ),
+                        validator: (value) {
+                          if (value.toString().isEmpty) {
                             return 'Mobile Number is required';
-                          }else if(value.toString().length<10 || value.toString().length>10){
+                          } else if (value.toString().length < 10 ||
+                              value.toString().length > 10) {
                             return 'Enter valid Mobile Number';
                           }
                           return null;
@@ -353,21 +429,22 @@ class ServiceRequestForm1 extends StatelessWidget {
           ),
           bottomNavigationBar: GestureDetector(
               onTap: () {
-                if(e.formKey.currentState!.validate()){
+                if (e.formKey.currentState!.validate()) {
                   Utilities.form1List = {};
-                  Utilities.form1List =jsonEncode( {
-                    "recipientName" : e.recipientController.text.toString(),
-                    "recipientSurname" : e.surNameController.text.toString(),
-                    "recipientSonOf" : e.sonOfController.text.toString(),
-                    "recipientDOB" : e.dobController.text.toString(),
-                    "recipientGender" : e.genderController.text.toString(),
-                    "recipientMobNumber" : e.mobNumController.text.toString(),
-                    "recipientAltMobNumber" : e.altMobNumController.text.toString(),
-                    "requestType" : e.argumentData,
+                  Utilities.form1List = jsonEncode({
+                    "recipientName": e.recipientController.text.toString(),
+                    "recipientSurname": e.surNameController.text.toString(),
+                    "recipientSonOf": e.sonOfController.text.toString(),
+                    "recipientDOB": e.dobController.text.toString(),
+                    "recipientGender": e.genderController.text.toString(),
+                    "recipientMobNumber": e.mobNumController.text.toString(),
+                    "recipientAltMobNumber":
+                        e.altMobNumController.text.toString(),
+                    "requestType": e.serviceTypeDropDownValue.toString(),
                   });
                   log(Utilities.form1List.toString());
                   log('next');
-                  Get.to(()=>const ServiceRequestForm2());
+                  Get.to(() => const ServiceRequestForm2());
                 }
               },
               child: Container(
