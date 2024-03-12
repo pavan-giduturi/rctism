@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rctism/helpers/utilities.dart';
 
 import '../../controllers/pdprofile/pdprofilecontroller.dart';
 import '../../controllers/profilesdirectory/profileslistcontroller.dart';
+import '../servicerequestforms/socialworkerform1.dart';
 import 'empprofile.dart';
 
 class Profileslist extends StatelessWidget {
@@ -28,10 +30,16 @@ class Profileslist extends StatelessWidget {
               appBar: AppBar(
                   title: Text(titlename.toString(),style: TextStyle(fontWeight: FontWeight.bold)),
                 actions: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: GestureDetector(
-                      child: Icon(Icons.add_circle_outlined,color: Colors.deepPurple,),
+                  Visibility(
+                    visible: Utilities.isPojectDirector,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: GestureDetector(
+                        child: Icon(Icons.add_circle_outlined,color: Colors.deepPurple,),
+                        onTap: (){
+                          Get.to(() => const SocialworkerForm1(),arguments: "add");
+                        },
+                      ),
                     ),
                   )
                 ],

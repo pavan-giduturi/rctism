@@ -141,6 +141,7 @@ class LoginController extends GetxController {
       Utilities.isPojectDirector = true;
     }else if(response['data']['user_role'].toString() == "sw"){
       Utilities.isSocialWorker = true;
+      Utilities.isServiceRequest = true;
     }else if(response['data']['user_role'].toString() == "srq"){
       Utilities.isServiceRequest = true;
     }

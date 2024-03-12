@@ -44,7 +44,6 @@ class ProfileslistController extends GetxController{
     serviceRequestslistData = [];
 
     if(empMainRoleType == "pof"){
-      empRoleType = "po";
       empID="1";
       await ApiService.getProfilesListData("pm_users",userID,empCode,empRoleType,empID).then((success) {
         var responseBody = json.decode(success);
