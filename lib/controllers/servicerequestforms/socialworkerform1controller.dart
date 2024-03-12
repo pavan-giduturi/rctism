@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class SocialworkerForm1Controller extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -55,5 +57,27 @@ class SocialworkerForm1Controller extends GetxController {
     // TODO: implement onInit
     super.onInit();
     log(argumentData.toString());
+  }
+
+  datePicker(context) async {
+    DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(), //get today's date
+        firstDate: DateTime(
+            2000), //DateTime.now() - not to allow to choose before today.
+        lastDate: DateTime(2101));
+    if (pickedDate != null) {
+      log(pickedDate
+          .toString()); //get the picked date in the format => 2022-07-04 00:00:00.000
+      String formattedDate = DateFormat('yyyy-MM-dd').format(
+          pickedDate); // format date in required form here we use yyyy-MM-dd that means time is removed
+      log(formattedDate
+          .toString()); //formatted date output using intl package =>  2022-07-04
+      //You can format date as per your need
+      dobController.text =
+          formattedDate; //set foratted date to TextField value.
+    } else {
+      log("Date is not selected");
+    }
   }
 }

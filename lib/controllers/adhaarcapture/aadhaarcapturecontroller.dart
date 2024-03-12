@@ -363,4 +363,126 @@ class AadhaarCaptureController extends GetxController {
       update();
     });
   }
+
+  submitSocialworkerForm() async {
+    SharedPreferences userPref = await SharedPreferences.getInstance();
+    var empCode = userPref.getString('empCode').toString();
+    var empID = userPref.getString('empID').toString();
+    var userID = userPref.getString('userID').toString();
+    var roleType = userPref.getString('empRoleType').toString();
+    var form1Data = jsonDecode(Utilities.socialWorkerFormList);
+    var identityCaptureData = jsonDecode(Utilities.identityCaptureList);
+    var aadhaarCaptureData = jsonDecode(Utilities.aadhaarCaptureList);
+    var recipientName = form1Data['recipientName'].toString();
+    var recipientSurName = form1Data['recipientSurname'].toString();
+    var recipientGender = form1Data['recipientGender'].toString();
+    var recipientSonOf = form1Data['recipientSonOf'].toString();
+    var guardianName = form1Data['recipientName'].toString();
+    var mobNumber = form1Data['recipientMobNumber'].toString();
+    var altMobNum = form1Data['recipientAltMobNumber'].toString();
+    var recipientDOB = form1Data['recipientDOB'].toString();
+    var aadhaarNum = form1Data['aadhaarNumber'].toString();
+    var doorNum = form1Data['doorNum'].toString();
+    var streetName = form1Data['streetName'].toString();
+    var villageName = form1Data['villageName'].toString();
+    var mandalName = form1Data['mandalName'].toString();
+    var stateID = form1Data['stateID'].toString();
+    var districtID = form1Data['districtID'].toString();
+    var pinCode = form1Data['districtID'].toString();
+    var actionType = 'new';
+    var cultivationType = form1Data['cultivationType'].toString();
+    var acresID = form1Data['landExtent'].toString();
+    var centsID = form1Data['landCents'].toString();
+    var voterID = form1Data['voterID'].toString();
+    var addedBy = userID.toString();
+    var photoPath = identityCaptureData['filePath'].toString();
+    var aadhaarFront = aadhaarCaptureData['fileFrontPath'].toString();
+    var aadhaarBack = aadhaarCaptureData['fileBackPath'].toString();
+    log('-----------------------');
+    log(empCode.toString());
+    log(empID.toString());
+    log(userID.toString());
+    log(roleType.toString());
+    log('-----------------------');
+    log('-----------------------');
+    log(form1Data.toString());
+    log(form2Data.toString());
+    log(identityCaptureData.toString());
+    log(aadhaarCaptureData.toString());
+    log('-----------------------');
+    await ApiService.submitServiceRequest(
+        "add_social_workers",
+        empCode,
+        userID,
+        roleType,
+        empID,
+        reqType,
+        recipientName,
+        recipientSurName,
+        recipientGender,
+        recipientSonOf,
+        guardianName,
+        mobNumber,
+        altMobNum,
+        recipientDOB,
+        aadhaarNum,
+        doorNum,
+        streetName,
+        villageName,
+        mandalName,
+        stateID,
+        districtID,
+        pinCode,
+        actionType,
+        cultivationType,
+        acresID,
+        centsID,
+        voterID,
+        addedBy,
+        photoPath,
+        aadhaarFront,
+        aadhaarBack
+    ).then((success) {
+      var responseBody = json.decode(success);
+      log(responseBody.toString());
+      if (responseBody['status'].toString() == 'true') {
+        Get.snackbar('Success', 'New Service Request Submitted Successfully',
+            messageText: const Text(
+              'New Service Request Submitted Successfully',
+              style:
+              TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+            ),
+            titleText: const Text('Success',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white)),
+            backgroundColor: Colors.deepPurple,
+            barBlur: 20,
+            overlayBlur: 5,
+            colorText: Colors.black,
+            animationDuration: const Duration(seconds: 3));
+        Get.offAll(()=>const HomeScreen());
+        Utilities.form1List = {};
+        Utilities.form2List = {};
+        Utilities.identityCaptureList = {};
+        Utilities.aadhaarCaptureList = {};
+      } else {
+        Get.snackbar('Alert', 'Error Occured',
+            messageText: const Text(
+              'Error Occured',
+              style:
+              TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+            ),
+            titleText: const Text('Alert',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white)),
+            backgroundColor: Colors.deepPurple,
+            barBlur: 20,
+            overlayBlur: 5,
+            colorText: Colors.black,
+            animationDuration: const Duration(seconds: 3));
+        log('error');
+      }
+      update();
+    });
+  }
 }

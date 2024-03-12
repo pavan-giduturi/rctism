@@ -38,7 +38,8 @@ class Profileslist extends StatelessWidget {
                       color: Colors.deepPurple,
                     ),
                     onTap: () {
-                      Get.to(() => const SocialWorkerForm1(), arguments: "add");
+                      Get.to(() => const SocialworkerForm1(), arguments: "add");
+
                     },
                   ),
                 ),

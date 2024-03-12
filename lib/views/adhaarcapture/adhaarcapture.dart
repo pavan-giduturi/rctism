@@ -8,7 +8,8 @@ import '../../controllers/adhaarcapture/aadhaarcapturecontroller.dart';
 import '../../helpers/utilities.dart';
 
 class AadhaarCapture extends StatelessWidget {
-  const AadhaarCapture({super.key});
+   AadhaarCapture({super.key});
+  dynamic argumentData = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +155,15 @@ class AadhaarCapture extends StatelessWidget {
                           'fileBackBase64':e.backBaseImg[0].toString().isEmpty?"":e.backBaseImg[0].toString(),
                         });
                         log(Utilities.aadhaarCaptureList.toString());
-                        e.submitServiceRequestForm();
+
+                        print("argumentData");
+                        print(argumentData);
+                        if(argumentData.toString() == "serviceRequest"){
+                          e.submitServiceRequestForm();
+                        }else if(argumentData.toString() == "socialWorker"){
+                          e.submitSocialworkerForm();
+                        }
+
                       },
                       child: Container(
                           margin: const EdgeInsets.only(top: 30),

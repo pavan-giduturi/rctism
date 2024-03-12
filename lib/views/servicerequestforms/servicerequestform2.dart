@@ -684,7 +684,7 @@ class ServiceRequestForm2 extends StatelessWidget {
                     "voterID" : e.voterIdController.text.toString(),
                   });
                   log(Utilities.form2List.toString());
-                  Get.to(()=>const IdentityCapture(),);
+                  Get.to(()=> IdentityCapture(),arguments: "serviceRequest");
                 }
               },
               child: Container(

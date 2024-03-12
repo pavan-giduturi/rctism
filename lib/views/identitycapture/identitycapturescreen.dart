@@ -9,7 +9,8 @@ import 'package:rctism/views/adhaarcapture/adhaarcapture.dart';
 import '../../controllers/identitycapture/identitycapturecontroller.dart';
 
 class IdentityCapture extends StatelessWidget {
-  const IdentityCapture({super.key});
+   IdentityCapture({super.key});
+  dynamic argumentData = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +120,7 @@ class IdentityCapture extends StatelessWidget {
                                 'fileBase64':e.baseImg[0].toString().isEmpty?"":e.baseImg[0].toString().isEmpty,
                               });
                               log(Utilities.identityCaptureList.toString());
-                              Get.to(()=>const AadhaarCapture());
+                              Get.to(()=> AadhaarCapture(),arguments: argumentData);
                             },
                             child: Container(
                                 margin: const EdgeInsets.only(top: 20),
