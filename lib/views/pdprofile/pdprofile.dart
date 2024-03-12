@@ -41,14 +41,14 @@ class PdProfile extends StatelessWidget {
                     Table(
                       defaultColumnWidth: const FixedColumnWidth(150.0),
                       children: [
-                        const TableRow(children: [
+                         TableRow(children: [
                           TableCell(
                               child: Text(
                             'Project Director : ',
                             style: TextStyle(color: Color(0xFF583988)),
                           )),
                           TableCell(
-                            child: Text('Project Director Name',
+                            child: Text(e.profileData['name'].toString(),
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
@@ -185,7 +185,9 @@ class PdProfile extends StatelessWidget {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(10)),
                           border: Border.all(color: const Color(0xFF583988))),
-                      child: Image.asset('assets/images/applogo.png'),
+                      child: e.profileData['profile_img'].toString().isNotEmpty ?  Image.network(
+                        e.profileData['profile_img'].toString(),
+                      ) : Image.asset('assets/images/applogo.png'),
                     )
                   ],
                 ),

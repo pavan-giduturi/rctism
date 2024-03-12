@@ -8,6 +8,7 @@ import '../pdprofile/pdprofile.dart';
 import '../profilesdirectory/profileslist.dart';
 import '../profilesdirectory/servicerequestslist.dart';
 import '../servicerequestforms/servicerequestform1.dart';
+import 'notifications.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -127,29 +128,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 Visibility(
-                                  visible: Utilities.isSocialWorker,
+                                  visible: Utilities.isSocialWorker || Utilities.isServiceRequest ? Utilities.isServiceRequest : false,
                                   child: ListTile(
                                     onTap: () {
                                       Get.to(() => const ServiceRequestslist());
-                                    },
-                                    leading: Image.asset(
-                                      'assets/icons/cardsicon.png',
-                                      height: 22,
-                                      width: 22,
-                                    ),
-                                    title: const Text(
-                                      'My Service Requests',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Visibility(
-                                  visible: Utilities.isServiceRequest,
-                                  child: ListTile(
-                                    onTap: () {
-                                      Get.to(() => const Profileslist());
                                     },
                                     leading: Image.asset(
                                       'assets/icons/cardsicon.png',
@@ -264,6 +246,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 30,
                         width: 30,
                       ),
+                      onTap: (){
+                        Get.to(() =>  Notificationslist());
+                      },
                     ),
                   )
                 ],
@@ -346,110 +331,120 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ]),
                         ),
-                        Card(
-                          margin: const EdgeInsets.symmetric(vertical: 20),
-                          color: const Color(0xFFd0cadc),
-                          child: ListTile(
-                            leading: Image.asset(
-                              'assets/icons/lockicon.png',
-                              height: 30,
-                              width: 30,
-                            ),
-                            title: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Service Requests (28)',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
-                                    ),
-                                    Text(
-                                      'Updated on 13 Feb 2024',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 10),
-                                    )
-                                  ]),
-                            ),
-                            trailing: Image.asset(
-                              'assets/icons/arrowicon.png',
-                              height: 25,
-                              width: 25,
+                        Visibility(
+                          visible: Utilities.isServiceRequest,
+                          child: Card(
+                            margin: const EdgeInsets.symmetric(vertical: 20),
+                            color: const Color(0xFFd0cadc),
+                            child: ListTile(
+                              leading: Image.asset(
+                                'assets/icons/lockicon.png',
+                                height: 30,
+                                width: 30,
+                              ),
+                              title: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Service Requests (28)',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
+                                      Text(
+                                        'Updated on 13 Feb 2024',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 10),
+                                      )
+                                    ]),
+                              ),
+                              trailing: Image.asset(
+                                'assets/icons/arrowicon.png',
+                                height: 25,
+                                width: 25,
+                              ),
                             ),
                           ),
                         ),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 10),
-                              child: Text(
-                                'Service Requests',
-                                style: TextStyle(
-                                    fontSize: 12, fontWeight: FontWeight.bold),
+                        Visibility(
+                          visible: Utilities.isServiceRequest,
+                          child: const Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10,top: 20),
+                                child: Text(
+                                  'Service Requests',
+                                  style: TextStyle(
+                                      fontSize: 12, fontWeight: FontWeight.bold),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                        Card(
-                          color: Colors.white,
-                          child: GridView.builder(
-                              physics: const ScrollPhysics(),
-                              shrinkWrap: true,
-                              gridDelegate:
-                                  const SliverGridDelegateWithMaxCrossAxisExtent(
-                                      mainAxisExtent: 100,
-                                      maxCrossAxisExtent: 100,
-                                      childAspectRatio: 2.5 / 2,
-                                      crossAxisSpacing: 10,
-                                      mainAxisSpacing: 10),
-                              itemCount: e.serviceReqGrid.length,
-                              itemBuilder: (BuildContext ctx, index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    Get.to(() => const ServiceRequestForm1(),arguments: e.serviceReqGrid[index]['name']
-                                        .toString());
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      children: [
-                                        Card(
-                                          color: Colors.white,
-                                          shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(20),
+                        Visibility(
+                          visible: Utilities.isServiceRequest,
+                          child: Card(
+                            color: Colors.white,
+                            child: GridView.builder(
+                                physics: const ScrollPhysics(),
+                                shrinkWrap: true,
+                                gridDelegate:
+                                    const SliverGridDelegateWithMaxCrossAxisExtent(
+                                        mainAxisExtent: 100,
+                                        maxCrossAxisExtent: 100,
+                                        childAspectRatio: 2.5 / 2,
+                                        crossAxisSpacing: 10,
+                                        mainAxisSpacing: 10),
+                                itemCount: e.serviceReqGrid.length,
+                                itemBuilder: (BuildContext ctx, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Get.to(() => const ServiceRequestForm1(),arguments: e.serviceReqGrid[index]['name']
+                                          .toString());
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          Card(
+                                            color: Colors.white,
+                                            shape: const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(20),
+                                                ),
+                                                side: BorderSide(
+                                                    color: Colors.yellow)),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Image.asset(
+                                                e.serviceReqGrid[index]['image']
+                                                    .toString(),
+                                                height: 30,
+                                                width: 30,
                                               ),
-                                              side: BorderSide(
-                                                  color: Colors.yellow)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Image.asset(
-                                              e.serviceReqGrid[index]['image']
-                                                  .toString(),
-                                              height: 30,
-                                              width: 30,
                                             ),
                                           ),
-                                        ),
-                                        Text(
-                                          e.serviceReqGrid[index]['name']
-                                              .toString(),
-                                          textAlign: TextAlign.center,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold),
-                                        )
-                                      ],
+                                          Text(
+                                            e.serviceReqGrid[index]['name']
+                                                .toString(),
+                                            textAlign: TextAlign.center,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                );
-                              }),
+                                  );
+                                }),
+                          ),
                         ),
                         const SizedBox(
                           height: 20,
@@ -486,24 +481,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                         style: TextStyle(color: Colors.white),
                                       ),
                                     ),
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: const Row(
-                                        children: [
-                                          Text(
-                                            'view all',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 12),
-                                          ),
-                                          Icon(
-                                            Icons.arrow_forward_ios,
-                                            color: Colors.white,
-                                            size: 10,
-                                          )
-                                        ],
-                                      ),
-                                    )
+                                    // GestureDetector(
+                                    //   onTap: () {},
+                                    //   child: const Row(
+                                    //     children: [
+                                    //       Text(
+                                    //         'view all',
+                                    //         style: TextStyle(
+                                    //             color: Colors.white,
+                                    //             fontSize: 12),
+                                    //       ),
+                                    //       Icon(
+                                    //         Icons.arrow_forward_ios,
+                                    //         color: Colors.white,
+                                    //         size: 10,
+                                    //       )
+                                    //     ],
+                                    //   ),
+                                    // )
                                   ],
                                 ), //Text
                               ),
