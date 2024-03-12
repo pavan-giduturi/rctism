@@ -3,6 +3,7 @@ class Utilities{
   static dynamic form2List;
   static dynamic identityCaptureList;
   static dynamic aadhaarCaptureList = [];
+  static dynamic socialWorkerFormList;
   static bool isProjectOfficer = false;
   static bool isPojectDirector = false;
   static bool isSocialWorker = false;

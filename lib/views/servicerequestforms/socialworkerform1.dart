@@ -8,8 +8,8 @@ import 'package:rctism/views/servicerequestforms/servicerequestform2.dart';
 
 import '../../controllers/servicerequestforms/servicerequestform1controller.dart';
 
-class SocialworkerForm1 extends StatelessWidget {
-  const SocialworkerForm1({super.key});
+class SocialWorkerForm1 extends StatelessWidget {
+  const SocialWorkerForm1({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,9 +76,10 @@ class SocialworkerForm1 extends StatelessWidget {
                               borderRadius:
                               BorderRadius.all(Radius.circular(10))),
                           fillColor: Color(0xFFf1f1f1),
-                          filled: true,),
-                        validator: (value){
-                          if(value.toString().isEmpty){
+                          filled: true,
+                        ),
+                        validator: (value) {
+                          if (value.toString().isEmpty) {
                             return 'Recipient Name is required';
                           }
                           return null;
@@ -118,9 +119,10 @@ class SocialworkerForm1 extends StatelessWidget {
                               borderRadius:
                               BorderRadius.all(Radius.circular(10))),
                           fillColor: Color(0xFFf1f1f1),
-                          filled: true,),
-                        validator: (value){
-                          if(value.toString().isEmpty){
+                          filled: true,
+                        ),
+                        validator: (value) {
+                          if (value.toString().isEmpty) {
                             return 'SurName is required';
                           }
                           return null;
@@ -160,9 +162,10 @@ class SocialworkerForm1 extends StatelessWidget {
                               borderRadius:
                               BorderRadius.all(Radius.circular(10))),
                           fillColor: Color(0xFFf1f1f1),
-                          filled: true,),
-                        validator: (value){
-                          if(value.toString().isEmpty){
+                          filled: true,
+                        ),
+                        validator: (value) {
+                          if (value.toString().isEmpty) {
                             return 'S/o. D/o, W/o is required';
                           }
                           return null;
@@ -315,9 +318,10 @@ class SocialworkerForm1 extends StatelessWidget {
                               borderRadius:
                               BorderRadius.all(Radius.circular(10))),
                           fillColor: Color(0xFFf1f1f1),
-                          filled: true,),
-                        validator: (value){
-                          if(value.toString().isEmpty){
+                          filled: true,
+                        ),
+                        validator: (value) {
+                          if (value.toString().isEmpty) {
                             return 'Gender is required';
                           }
                           return null;
@@ -358,11 +362,13 @@ class SocialworkerForm1 extends StatelessWidget {
                               borderRadius:
                               BorderRadius.all(Radius.circular(10))),
                           fillColor: Color(0xFFf1f1f1),
-                          filled: true,),
-                        validator: (value){
-                          if(value.toString().isEmpty){
+                          filled: true,
+                        ),
+                        validator: (value) {
+                          if (value.toString().isEmpty) {
                             return 'Mobile Number is required';
-                          }else if(value.toString().length<10 || value.toString().length>10){
+                          } else if (value.toString().length < 10 ||
+                              value.toString().length > 10) {
                             return 'Enter valid Mobile Number';
                           }
                           return null;
@@ -403,11 +409,13 @@ class SocialworkerForm1 extends StatelessWidget {
                               borderRadius:
                               BorderRadius.all(Radius.circular(10))),
                           fillColor: Color(0xFFf1f1f1),
-                          filled: true,),
-                        validator: (value){
-                          if(value.toString().isEmpty){
+                          filled: true,
+                        ),
+                        validator: (value) {
+                          if (value.toString().isEmpty) {
                             return 'Mobile Number is required';
-                          }else if(value.toString().length<10 || value.toString().length>10){
+                          } else if (value.toString().length < 10 ||
+                              value.toString().length > 10) {
                             return 'Enter valid Mobile Number';
                           }
                           return null;
@@ -421,21 +429,22 @@ class SocialworkerForm1 extends StatelessWidget {
           ),
           bottomNavigationBar: GestureDetector(
               onTap: () {
-                if(e.formKey.currentState!.validate()){
+                if (e.formKey.currentState!.validate()) {
                   Utilities.form1List = {};
-                  Utilities.form1List =jsonEncode( {
-                    "recipientName" : e.recipientController.text.toString(),
-                    "recipientSurname" : e.surNameController.text.toString(),
-                    "recipientSonOf" : e.sonOfController.text.toString(),
-                    "recipientDOB" : e.dobController.text.toString(),
-                    "recipientGender" : e.genderController.text.toString(),
-                    "recipientMobNumber" : e.mobNumController.text.toString(),
-                    "recipientAltMobNumber" : e.altMobNumController.text.toString(),
-                    "requestType" : e.argumentData,
+                  Utilities.form1List = jsonEncode({
+                    "recipientName": e.recipientController.text.toString(),
+                    "recipientSurname": e.surNameController.text.toString(),
+                    "recipientSonOf": e.sonOfController.text.toString(),
+                    "recipientDOB": e.dobController.text.toString(),
+                    "recipientGender": e.genderController.text.toString(),
+                    "recipientMobNumber": e.mobNumController.text.toString(),
+                    "recipientAltMobNumber":
+                    e.altMobNumController.text.toString(),
+                    "requestType": e.serviceTypeDropDownValue.toString(),
                   });
                   log(Utilities.form1List.toString());
                   log('next');
-                  Get.to(()=>const ServiceRequestForm2());
+                  Get.to(() => const ServiceRequestForm2());
                 }
               },
               child: Container(
