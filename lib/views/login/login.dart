@@ -188,8 +188,8 @@ class LoginScreen extends StatelessWidget {
                             } else {
                               if (c.empID.text.toString().isNotEmpty &&
                                   c.empPassword.text.toString().isNotEmpty) {
-                                c.getLogin(c.empID.text.toString(),c.empPassword.text.toString());
-                                // c.getLogin('RCTD0478', '9492265601');
+                                // c.getLogin(c.empID.text.toString(),c.empPassword.text.toString());
+                                c.getLogin('RCTD0478', '9492265601');
                               }else{
                                 Get.snackbar('Alert', 'Credentials Required',
                                     messageText: const Text(
