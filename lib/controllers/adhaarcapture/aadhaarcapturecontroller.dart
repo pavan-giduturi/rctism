@@ -406,17 +406,15 @@ class AadhaarCaptureController extends GetxController {
     log('-----------------------');
     log('-----------------------');
     log(form1Data.toString());
-    log(form2Data.toString());
     log(identityCaptureData.toString());
     log(aadhaarCaptureData.toString());
     log('-----------------------');
-    await ApiService.submitServiceRequest(
+    await ApiService.submitSocialWorker(
         "add_social_workers",
         empCode,
         userID,
         roleType,
         empID,
-        reqType,
         recipientName,
         recipientSurName,
         recipientGender,

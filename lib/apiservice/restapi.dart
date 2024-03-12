@@ -265,4 +265,97 @@ class ApiService {
 
     return response.stream.bytesToString();
   }
+
+  static Future<String> submitSocialWorker(
+      String url,
+      String empCode,
+      String empUserId,
+      String empRoleType,
+      String empID,
+      // String requestType,
+      String recipientName,
+      String recipientSurName,
+      String recipientGender,
+      String recipientSonOf,
+      String guardianName,
+      String mobNumber,
+      String altMobNum,
+      String recipientDOB,
+      String aadhaarNum,
+      String doorNum,
+      String streetName,
+      String villageName,
+      String mandalName,
+      String stateID,
+      String districtID,
+      String pinCode,
+      String actionType,
+      String cultivationType,
+      String acresID,
+      String centsID,
+      String voterID,
+      String addedBy,
+      String photoPath,
+      String aadhaarFront,
+      String aadhaarBack,
+      ) async {
+    var postUri = Uri.parse('${Url.baseUrl}/$url');
+    log(postUri.toString());
+    log(Url.apiToken.toString());
+    http.MultipartRequest request = http.MultipartRequest("POST", postUri);
+
+    Map<String, String> headers = {
+      "Content-Type": "multipart/form-data",
+      "Authorization": "Bearer ${Url.apiToken}"
+    };
+
+    request.headers.addAll(headers);
+
+    request.fields["inputEmpCode"] = empCode;
+    request.fields["user_id"] = empUserId;
+    request.fields["role_type"] = empRoleType;
+    request.fields["emp_id"] = empID;
+    // request.fields["req_type"] = requestType;
+    // request.fields["req_type"] = "1";
+    request.fields["recp_name"] = recipientName;
+    request.fields["recp_surname"] = recipientSurName;
+    request.fields["gender"] = recipientGender;
+    request.fields["rel_ms"] = recipientSonOf;
+    request.fields["gardian_name"] = guardianName;
+    request.fields["phone_no"] = mobNumber;
+    request.fields["alt_no"] = altMobNum;
+    // request.fields["dob"] = "2023-06-29";
+    request.fields["dob"] = recipientDOB;
+    request.fields["aadhaar_no"] = aadhaarNum;
+    request.fields["door_no"] = doorNum;
+    request.fields["street"] = streetName;
+    request.fields["village"] = villageName;
+    request.fields["mandal"] = mandalName;
+    request.fields["state_id"] = stateID;
+    request.fields["district"] = districtID;
+    request.fields["pincode"] = pinCode;
+    request.fields["action_type"] = actionType;
+    request.fields["cult_type"] = cultivationType;
+    request.fields["acres"] = acresID;
+    request.fields["cents"] = centsID;
+    request.fields["voter_id"] = voterID;
+    request.fields["added_by"] = addedBy;
+
+    log("request.fields");
+    log(request.fields.toString());
+
+    request.files.add(await http.MultipartFile.fromPath('profile_img', photoPath));
+    request.files.add(await http.MultipartFile.fromPath('cropped_profile_img', photoPath));
+    request.files
+        .add(await http.MultipartFile.fromPath('aadhar_back', aadhaarBack));
+    request.files
+        .add(await http.MultipartFile.fromPath('aadhar_front', aadhaarFront));
+
+    log("request.files");
+    log(request.files.toString());
+
+    http.StreamedResponse response = await request.send();
+
+    return response.stream.bytesToString();
+  }
 }
