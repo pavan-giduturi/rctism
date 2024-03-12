@@ -180,37 +180,105 @@ class SocialworkerForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        onTap: () {
+                          e.datePicker(context);
+                        },
+                        readOnly: true,
                         controller: e.dobController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFf1f1f1),
-                                ),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                            fillColor: Color(0xFFf1f1f1),
-                            filled: true,
-                            hintText: 'DDMMYYYY'),
-                        validator: (value){
-                          if(value.toString().isEmpty){
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(10))),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(10))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(10))),
+                          fillColor: Color(0xFFf1f1f1),
+                          filled: true,
+                          hintText: 'DDMMYYYY',
+                          suffixIcon: Icon(Icons.calendar_month),
+                        ),
+                        validator: (value) {
+                          if (value.toString().isEmpty) {
                             return 'DOB is required';
-                          }else if(value.toString().length<8){
+                          } else if (value.toString().length < 8) {
                             return 'Enter Valid DOB in DDMMYYYY format';
                           }
                           return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
+                        'Service Type*',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      DropdownButtonFormField(
+                        style: const TextStyle(fontSize: 12,fontWeight: FontWeight.w400),
+                        isExpanded: true,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(10))),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(10))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFf1f1f1),
+                              ),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(10))),
+                          fillColor: Color(0xFFf1f1f1),
+                          filled: true,
+                        ),
+                        isDense: true,
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                        ),
+                        iconSize: 30,
+                        items: e.serviceReqTypes.map((item) {
+                          return DropdownMenuItem(
+                            value: item['id'].toString(),
+                            child: Text(
+                              item['name'],
+                              style: const TextStyle(color: Colors.black),
+                            ),
+                          );
+                        }).toList(),
+                        value: e.serviceTypeDropDownValue,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Field is required';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) {
+                          log('Selected Value is $value');
+                          e.serviceTypeDropDownValue = value.toString();
                         },
                       ),
                       const SizedBox(

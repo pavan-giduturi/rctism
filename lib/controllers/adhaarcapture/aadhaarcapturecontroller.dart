@@ -324,8 +324,6 @@ class AadhaarCaptureController extends GetxController {
       var responseBody = json.decode(success);
       log(responseBody.toString());
       if (responseBody['status'].toString() == 'true') {
-        // serviceRequestResponse = responseBody;
-        // log(serviceRequestResponse.toString());
         Get.snackbar('Success', 'New Service Request Submitted Successfully',
             messageText: const Text(
               'New Service Request Submitted Successfully',
@@ -341,6 +339,10 @@ class AadhaarCaptureController extends GetxController {
             colorText: Colors.black,
             animationDuration: const Duration(seconds: 3));
         Get.offAll(()=>const HomeScreen());
+        Utilities.form1List = {};
+        Utilities.form2List = {};
+        Utilities.identityCaptureList = {};
+        Utilities.aadhaarCaptureList = {};
       } else {
         Get.snackbar('Alert', 'Error Occured',
             messageText: const Text(

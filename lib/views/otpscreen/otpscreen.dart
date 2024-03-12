@@ -5,8 +5,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rctism/views/home/homescreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../apiservice/restapi.dart';
+import '../../helpers/utilities.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -296,7 +298,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
       log(responseBody.toString());
       if (responseBody['status'].toString() == 'true') {
-        mobOTP = responseBody['otp_code'].toString();
+        saveUserDetails(responseBody);
         Get.snackbar('Alert', 'OTP Verified successfully',
             messageText: const Text(
               'OTP Verified successfully',
@@ -329,5 +331,41 @@ class _OtpScreenState extends State<OtpScreen> {
         log('error');
       }
     });
+  }
+}
+
+saveUserDetails(response) async {
+  SharedPreferences userPref = await SharedPreferences.getInstance();
+  userPref.setString("empCode", response["data"]['emp_code'].toString());
+  userPref.setString("userID", response["data"]['user_id'].toString());
+  userPref.setString("empID", response["data"]['emp_id'].toString());
+  userPref.setString("empRole", response['data']['user_role'].toString());
+  userPref.setString("empName", response["profile"]['name'].toString());
+  userPref.setString("empSurname", response['profile']['surname'].toString());
+  userPref.setString("empMobNum", response['profile']['emp_mobile'].toString());
+  userPref.setString("empRoleType", response['profile']['role'].toString());
+  userPref.setBool("isLogin", true);
+  log("==================");
+  // log(response.toString());
+  log(userPref.getString('empCode').toString());
+  log(userPref.getString('empName').toString());
+  log(userPref.getString('empSurname').toString());
+  log(userPref.getString('empMobNum').toString());
+  log(userPref.getString('empRoleType').toString());
+  log(userPref.getString('userID').toString());
+  log(userPref.getString('empID').toString());
+  log(userPref.getBool('isLogin').toString());
+  log("==================");
+  if(response['data']['user_role'].toString() == "pof"){
+    Utilities.isProjectOfficer =true;
+  }else if(response['data']['user_role'].toString() == "pm"){
+    Utilities.isPojectDirector = true;
+  }else if(response['data']['user_role'].toString() == "pm"){
+    Utilities.isPojectDirector = true;
+  }else if(response['data']['user_role'].toString() == "sw"){
+    Utilities.isSocialWorker = true;
+    Utilities.isServiceRequest = true;
+  }else if(response['data']['user_role'].toString() == "srq"){
+    Utilities.isServiceRequest = true;
   }
 }
