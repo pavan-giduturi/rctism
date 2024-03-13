@@ -8,6 +8,8 @@ import '../pdprofile/pdprofile.dart';
 import '../profilesdirectory/profileslist.dart';
 import '../profilesdirectory/servicerequestslist.dart';
 import '../servicerequestforms/servicerequestform1.dart';
+import 'changepassword.dart';
+import 'contactus.dart';
 import 'notifications.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -76,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 ListTile(
                                   onTap: () {
-                                    Get.to(() => const PdProfile());
+                                    Get.to(() =>  PdProfile(),arguments: "");
                                   },
                                   leading: const Icon(
                                     Icons.person,
@@ -148,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 ListTile(
                                   onTap: () {
-                                    // Get.offAll(() => const SearchVoterId());
+                                    Get.to(() =>  Contactus());
                                   },
                                   leading: const Icon(
                                     Icons.phone,
@@ -156,6 +158,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   title: const Text(
                                     'Contact Us',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                ListTile(
+                                  onTap: () {
+                                    Get.to(() =>  Changepassword());
+                                  },
+                                  leading: const Icon(
+                                    Icons.password,
+                                    color: Color(0xFF503083),
+                                  ),
+                                  title: const Text(
+                                    'Change Password',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -297,8 +314,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                const Text(
-                                  'Total Service Requests (28)',
+                                Text(
+                                  'Total Service Requests ${e.dashboardData['total_service_requests_count'].toString()}',
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 const SizedBox(

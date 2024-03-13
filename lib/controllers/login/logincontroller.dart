@@ -121,6 +121,7 @@ class LoginController extends GetxController {
     userPref.setString("empSurname", response['profile']['surname'].toString());
     userPref.setString("empMobNum", response['profile']['mobile'].toString());
     userPref.setString("empRoleType", response['profile']['role'].toString());
+    userPref.setString("empPmId", response['profile']['pm_id'].toString());
     userPref.setBool("isLogin", true);
     log("==================");
     // log(response.toString());

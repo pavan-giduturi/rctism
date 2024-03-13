@@ -18,7 +18,7 @@ class EmpProfile extends StatelessWidget {
               children: [
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 2,
-                  child: Text(e.profileData['role'].toString() == "null" ? "Profile" : e.profileData['role'].toString()+" Profile",
+                  child: Text( "Profile Details",
                     // 'PD/PO/SW Profile',
                   ),
                 ),
@@ -41,14 +41,14 @@ class EmpProfile extends StatelessWidget {
                     Table(
                       defaultColumnWidth: const FixedColumnWidth(150.0),
                       children: [
-                        const TableRow(children: [
+                         TableRow(children: [
                           TableCell(
                               child: Text(
-                            'Project Director : ',
+                            'Name : ',
                             style: TextStyle(color: Color(0xFF583988)),
                           )),
                           TableCell(
-                            child: Text('Project Director Name',
+                            child: Text(e.profileDataById['name'].toString(),
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
@@ -64,7 +64,7 @@ class EmpProfile extends StatelessWidget {
                             ),
                           ),
                           TableCell(
-                              child: Text(e.profileData['mobile'].toString(),
+                              child: Text(e.profileDataById['mobile'].toString(),
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                   )))
@@ -77,7 +77,7 @@ class EmpProfile extends StatelessWidget {
                             ),
                           ),
                           TableCell(
-                              child: Text(e.profileData['alt_mobile'].toString(),
+                              child: Text(e.profileDataById['alt_mobile'].toString(),
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                   )))
@@ -90,33 +90,7 @@ class EmpProfile extends StatelessWidget {
                             ),
                           ),
                           TableCell(
-                              child: Text(e.profileData['email'].toString(),
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  )))
-                        ]),
-                        TableRow(children: [
-                          const TableCell(
-                            child: Text(
-                              'Date of Birth : ',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                          TableCell(
-                              child: Text(e.profileData['dob'].toString(),
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  )))
-                        ]),
-                        TableRow(children: [
-                          const TableCell(
-                            child: Text(
-                              'Name of the Father/Husband : ',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                          TableCell(
-                              child: Text(e.profileData['f_h_name'].toString(),
+                              child: Text(e.profileDataById['email'].toString(),
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                   )))
@@ -129,7 +103,7 @@ class EmpProfile extends StatelessWidget {
                             ),
                           ),
                           TableCell(
-                              child: Text(e.profileData['qualification'].toString(),
+                              child: Text(e.profileDataById['qualification'].toString(),
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                   )))
@@ -142,33 +116,7 @@ class EmpProfile extends StatelessWidget {
                             ),
                           ),
                           TableCell(
-                              child: Text(e.profileData['gender'].toString(),
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  )))
-                        ]),
-                         TableRow(children: [
-                          const TableCell(
-                            child: Text(
-                              'Religion : ',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                          TableCell(
-                              child: Text(e.profileData['religion'].toString(),
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  )))
-                        ]),
-                        TableRow(children: [
-                          const TableCell(
-                            child: Text(
-                              'Marital Status : ',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                          TableCell(
-                              child: Text(e.profileData['marital_status'].toString(),
+                              child: Text(e.profileDataById['gender'].toString(),
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                   )))
@@ -183,9 +131,11 @@ class EmpProfile extends StatelessWidget {
                           top: 60, bottom: 20, left: 50, right: 60),
                       decoration: BoxDecoration(
                           borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                          const BorderRadius.all(Radius.circular(10)),
                           border: Border.all(color: const Color(0xFF583988))),
-                      child: Image.asset('assets/images/applogo.png'),
+                      child: e.profileDataById['profile_img'].toString().isNotEmpty ?  Image.network(
+                        e.profileDataById['profile_img'].toString(),
+                      ) : Image.asset('assets/images/applogo.png'),
                     )
                   ],
                 ),

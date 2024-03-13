@@ -51,8 +51,8 @@ class Profileslist extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   leading: CircleAvatar(
-                    backgroundImage: AssetImage(e.profileslistData[index]
-                            ["profile_img_path"]
+                    backgroundImage: NetworkImage(e.profileslistData[index]
+                    ["profile_img_path"]
                         .toString()), // No matter how big it is, it won't overflow
                   ),
                   trailing: const Icon(Icons.arrow_forward_ios),
@@ -71,15 +71,33 @@ class Profileslist extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 12,
                           )),
-                      Text(e.profileslistData[index]["emp_id"].toString(),
+                      Text(e.profileslistData[index]["aadhaar_no"].toString(),
                           style: const TextStyle(
                             fontSize: 12,
                           )),
                     ],
                   ),
                   onTap: () {
-                    Get.to(() => const EmpProfile(),
-                        arguments: e.profileslistData[index]);
+                    if(e.profileslistData[index]['emp_id'].toString().isNotEmpty){
+                      Get.to(() =>  EmpProfile(),
+                          arguments: e.profileslistData[index]['emp_id']);
+                    }else{
+                      Get.snackbar('Alert', "Sorry...",
+                          messageText:  Text(
+                            "This profile activation is temporarily unavailable",
+                            style:
+                            TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+                          ),
+                          titleText: const Text('Alert',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, color: Colors.white)),
+                          backgroundColor: Colors.deepPurple,
+                          barBlur: 20,
+                          overlayBlur: 5,
+                          colorText: Colors.black,
+                          animationDuration: const Duration(seconds: 3));
+                    }
+
                   },
                   shape: const Border(
                       bottom: BorderSide(

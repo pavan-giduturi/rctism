@@ -369,31 +369,29 @@ class AadhaarCaptureController extends GetxController {
     var empCode = userPref.getString('empCode').toString();
     var empID = userPref.getString('empID').toString();
     var userID = userPref.getString('userID').toString();
+    var empPmId = userPref.getString('empPmId').toString();
     var roleType = userPref.getString('empRoleType').toString();
     var form1Data = jsonDecode(Utilities.socialWorkerFormList);
     var identityCaptureData = jsonDecode(Utilities.identityCaptureList);
     var aadhaarCaptureData = jsonDecode(Utilities.aadhaarCaptureList);
-    var recipientName = form1Data['recipientName'].toString();
-    var recipientSurName = form1Data['recipientSurname'].toString();
-    var recipientGender = form1Data['recipientGender'].toString();
-    var recipientSonOf = form1Data['recipientSonOf'].toString();
-    var guardianName = form1Data['recipientName'].toString();
-    var mobNumber = form1Data['recipientMobNumber'].toString();
-    var altMobNum = form1Data['recipientAltMobNumber'].toString();
-    var recipientDOB = form1Data['recipientDOB'].toString();
-    var aadhaarNum = form1Data['aadhaarNumber'].toString();
-    var doorNum = form1Data['doorNum'].toString();
-    var streetName = form1Data['streetName'].toString();
-    var villageName = form1Data['villageName'].toString();
-    var mandalName = form1Data['mandalName'].toString();
-    var stateID = form1Data['stateID'].toString();
-    var districtID = form1Data['districtID'].toString();
-    var pinCode = form1Data['districtID'].toString();
+    var recipientName = form1Data['name'].toString();
+    var recipientSurName = form1Data['surname'].toString();
+    var recipientDOJ = form1Data['date_of_join'].toString();
+    var email = form1Data['email'].toString();
+    var mobNumber = form1Data['mobile'].toString();
+    var altMobNum = form1Data['alt_mobile'].toString();
+    var recipientGender = form1Data['gender'].toString();
+    var recipientqualification = form1Data['qualification'].toString();
+    var aadhaarNum = form1Data['aadhaar_no'].toString();
+    var voter_id_no = form1Data['voter_id_no'].toString();
+    var doorNum = form1Data['door_no'].toString();
+    var streetName = form1Data['street'].toString();
+    var villageName = form1Data['village'].toString();
+    var mandalName = form1Data['mandal'].toString();
+    var stateID = form1Data['state_id'].toString();
+    var districtID = form1Data['district'].toString();
+    var pinCode = form1Data['pincode'].toString();
     var actionType = 'new';
-    var cultivationType = form1Data['cultivationType'].toString();
-    var acresID = form1Data['landExtent'].toString();
-    var centsID = form1Data['landCents'].toString();
-    var voterID = form1Data['voterID'].toString();
     var addedBy = userID.toString();
     var photoPath = identityCaptureData['filePath'].toString();
     var aadhaarFront = aadhaarCaptureData['fileFrontPath'].toString();
@@ -415,15 +413,17 @@ class AadhaarCaptureController extends GetxController {
         userID,
         roleType,
         empID,
+        empPmId,
         recipientName,
         recipientSurName,
-        recipientGender,
-        recipientSonOf,
-        guardianName,
-        mobNumber,
+        recipientDOJ,
+        email,
         altMobNum,
-        recipientDOB,
+        mobNumber,
+        recipientGender,
+        recipientqualification,
         aadhaarNum,
+        voter_id_no,
         doorNum,
         streetName,
         villageName,
@@ -432,10 +432,6 @@ class AadhaarCaptureController extends GetxController {
         districtID,
         pinCode,
         actionType,
-        cultivationType,
-        acresID,
-        centsID,
-        voterID,
         addedBy,
         photoPath,
         aadhaarFront,
@@ -459,6 +455,7 @@ class AadhaarCaptureController extends GetxController {
             colorText: Colors.black,
             animationDuration: const Duration(seconds: 3));
         Get.offAll(()=>const HomeScreen());
+        Utilities.socialWorkerFormList = {};
         Utilities.form1List = {};
         Utilities.form2List = {};
         Utilities.identityCaptureList = {};

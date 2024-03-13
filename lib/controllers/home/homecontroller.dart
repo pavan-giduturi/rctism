@@ -1,14 +1,20 @@
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
 import 'package:rctism/views/login/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../apiservice/restapi.dart';
 import '../../helpers/utilities.dart';
 import '../../views/pdprofile/pdprofile.dart';
 
 class HomeScreenController extends GetxController {
   final advancedDrawerController = AdvancedDrawerController();
   String userName = '', empID = '', serviceReqCount = '', mobNum = '';
+  Map dashboardData = {};
   List serviceReqGrid = [
     {'id': '1', 'name': 'Grocery', 'image': 'assets/icons/groceryicon.png'},
     {'id': '2', 'name': 'Clothes', 'image': 'assets/icons/clothsicon.png'},
@@ -41,6 +47,7 @@ class HomeScreenController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    getDashboardData();
     setData();
   }
 
@@ -54,6 +61,40 @@ class HomeScreenController extends GetxController {
     update();
   }
 
+  getDashboardData() async {
+    SharedPreferences userPref = await SharedPreferences.getInstance();
+    var empCode = userPref.getString('empCode').toString();
+    var empID = userPref.getString('empID').toString();
+    var userID = userPref.getString('userID').toString();
+    var roleType = userPref.getString('empRoleType').toString();
+
+    await ApiService.getDashboardData("dashboard",empID, empCode, roleType, userID ).then((success) {
+      var responseBody = json.decode(success);
+      log(responseBody.toString());
+      if (responseBody['status'].toString() == 'true') {
+        dashboardData = responseBody['data'];
+        log(dashboardData.toString());
+      } else {
+        Get.snackbar('Alert', 'Acess Denied',
+            messageText:  Text(
+              'Access Denied',
+              style:
+              TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+            ),
+            titleText: Text('Alert',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white)),
+            backgroundColor: Colors.deepPurple,
+            barBlur: 20,
+            overlayBlur: 5,
+            colorText: Colors.black,
+            animationDuration: const Duration(seconds: 3));
+        log('error');
+      }
+      update();
+    });
+  }
+
   clearData() async {
     SharedPreferences userPref = await SharedPreferences.getInstance();
     userPref.clear();
@@ -64,4 +105,5 @@ class HomeScreenController extends GetxController {
     Get.offAll(()=>const LoginScreen());
     update();
   }
+
 }

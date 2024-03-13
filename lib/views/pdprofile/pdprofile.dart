@@ -18,7 +18,7 @@ class PdProfile extends StatelessWidget {
               children: [
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 2,
-                  child: Text(e.profileData['role'].toString() == "null" ? "Profile" : e.profileData['role'].toString()+" Profile",
+                  child: Text("My Profile",
                     // 'PD/PO/SW Profile',
                   ),
                 ),
