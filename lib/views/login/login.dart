@@ -143,7 +143,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                         onTap: () {
-                          if(c.checkValue == true){
+                          if (c.checkValue == true) {
                             if (c.empID.text.toString().isEmpty &&
                                 c.empPassword.text.toString().isEmpty) {
                               if (c.empMobile.text.toString().isEmpty) {
@@ -162,11 +162,12 @@ class LoginScreen extends StatelessWidget {
                                     barBlur: 3,
                                     colorText: Colors.black,
                                     animationDuration:
-                                    const Duration(seconds: 3));
+                                        const Duration(seconds: 3));
                               } else if (c.empMobile.text.toString().length >
-                                  10 ||
+                                      10 ||
                                   c.empMobile.text.toString().length < 10) {
-                                Get.snackbar('Alert', 'Enter Valid Mobile Number',
+                                Get.snackbar(
+                                    'Alert', 'Enter Valid Mobile Number',
                                     messageText: const Text(
                                       'Enter Valid Mobile Number',
                                       style: TextStyle(
@@ -181,16 +182,16 @@ class LoginScreen extends StatelessWidget {
                                     barBlur: 3,
                                     colorText: Colors.black,
                                     animationDuration:
-                                    const Duration(seconds: 3));
-                              }else{
+                                        const Duration(seconds: 3));
+                              } else {
                                 c.getOTP(c.empMobile.text.toString());
                               }
                             } else {
                               if (c.empID.text.toString().isNotEmpty &&
                                   c.empPassword.text.toString().isNotEmpty) {
-                                c.getLogin(c.empID.text.toString(),c.empPassword.text.toString());
-                                // c.getLogin('RCTD0478', '9492265601');
-                              }else{
+                                // c.getLogin(c.empID.text.toString(),c.empPassword.text.toString());
+                                c.getLogin('RCTD0478', '9492265601');
+                              } else {
                                 Get.snackbar('Alert', 'Credentials Required',
                                     messageText: const Text(
                                       'Credentials Required',
@@ -206,10 +207,10 @@ class LoginScreen extends StatelessWidget {
                                     barBlur: 3,
                                     colorText: Colors.black,
                                     animationDuration:
-                                    const Duration(seconds: 3));
+                                        const Duration(seconds: 3));
                               }
                             }
-                          }else{
+                          } else {
                             Get.snackbar('Alert', 'Accept Terms & Conditions',
                                 messageText: const Text(
                                   'Accept Terms & Conditions',
@@ -224,8 +225,7 @@ class LoginScreen extends StatelessWidget {
                                 backgroundColor: Colors.deepPurple,
                                 barBlur: 3,
                                 colorText: Colors.black,
-                                animationDuration:
-                                const Duration(seconds: 3));
+                                animationDuration: const Duration(seconds: 3));
                           }
                         },
                         child: Container(

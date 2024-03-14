@@ -298,12 +298,58 @@ class _OtpScreenState extends State<OtpScreen> {
 
       log(responseBody.toString());
       if (responseBody['status'].toString() == 'true') {
+        var empCode = responseBody["data"]['emp_code'].toString();
+        if(empCode.isNotEmpty || empCode != null){
+          getProfileData(empCode);
+        }else{
+          Get.snackbar('Alert', 'Error Occurred Invalid Data',
+              messageText: const Text(
+                'Error Occurred Invalid Data',
+                style:
+                TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+              ),
+              titleText: const Text('Alert',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
+              backgroundColor: Colors.deepPurple,
+              barBlur: 20,
+              overlayBlur: 5,
+              colorText: Colors.black,
+              animationDuration: const Duration(seconds: 3));
+        }
+      } else {
+        Get.snackbar('Alert', 'OTP Verification failed',
+            messageText: const Text(
+              'OTP Verification failed',
+              style:
+                  TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+            ),
+            titleText: const Text('Alert',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white)),
+            backgroundColor: Colors.deepPurple,
+            barBlur: 20,
+            overlayBlur: 5,
+            colorText: Colors.black,
+            animationDuration: const Duration(seconds: 3));
+        log('error');
+      }
+    });
+  }
+
+
+  getProfileData(empCode) async {
+    log('-----------------------');
+    await ApiService.getProfileData("profile",empCode ).then((success) {
+      var responseBody = json.decode(success);
+      if (responseBody['status'].toString() == 'true') {
+        log(responseBody.toString());
         saveUserDetails(responseBody);
         Get.snackbar('Alert', 'OTP Verified successfully',
             messageText: const Text(
               'OTP Verified successfully',
               style:
-                  TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+              TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
             ),
             titleText: const Text('Alert',
                 style: TextStyle(
@@ -314,11 +360,11 @@ class _OtpScreenState extends State<OtpScreen> {
             animationDuration: const Duration(seconds: 3));
         Get.offAll(() => const HomeScreen());
       } else {
-        Get.snackbar('Alert', 'OTP Verification failed',
+        Get.snackbar('Alert', 'Error Occurred Invalid Data',
             messageText: const Text(
-              'OTP Verification failed',
+              'Error Occurred Invalid Data',
               style:
-                  TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
+              TextStyle(fontWeight: FontWeight.w400, color: Colors.white),
             ),
             titleText: const Text('Alert',
                 style: TextStyle(
