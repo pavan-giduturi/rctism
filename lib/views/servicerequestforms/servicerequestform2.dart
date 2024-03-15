@@ -54,6 +54,7 @@ class ServiceRequestForm2 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        maxLength: 12,
                         keyboardType: TextInputType.number,
                         controller: e.aadhaarNumController,
                         style: const TextStyle(color: Colors.black),
@@ -147,7 +148,7 @@ class ServiceRequestForm2 extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Text(
-                                  'Extent of Land',
+                                  'Extent of Land (Acress)',
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold),
@@ -155,56 +156,90 @@ class ServiceRequestForm2 extends StatelessWidget {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                DropdownButtonFormField(
+                                TextFormField(
+                                  maxLength: 4,
+                                  keyboardType: TextInputType.number,
+                                  controller: e.extentActressController,
+                                  style: const TextStyle(color: Colors.black),
                                   decoration: const InputDecoration(
                                     border: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0xFFf1f1f1),
                                         ),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
                                     enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0xFFf1f1f1),
                                         ),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
                                     focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0xFFf1f1f1),
                                         ),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
                                     fillColor: Color(0xFFf1f1f1),
                                     filled: true,
                                   ),
-                                  isDense: true,
-                                  icon: const Icon(
-                                    Icons.arrow_drop_down,
-                                  ),
-                                  iconSize: 30,
-                                  items: e.landExtentList.map((item) {
-                                    return DropdownMenuItem(
-                                      value: item['id'].toString(),
-                                      child: Text(
-                                        item['name'],
-                                        style: const TextStyle(
-                                            color: Colors.black),
-                                      ),
-                                    );
-                                  }).toList(),
-                                  value: e.extentDropDownValue,
                                   validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Field is required';
+                                    if (value.toString().isEmpty) {
+                                      return 'Extent of Land is required';
                                     }
                                     return null;
                                   },
-                                  onChanged: (value) {
-                                    log('Selected Value is $value');
-                                    e.extentDropDownValue = value.toString();
-                                  },
                                 ),
+                                // DropdownButtonFormField(
+                                //   decoration: const InputDecoration(
+                                //     border: OutlineInputBorder(
+                                //         borderSide: BorderSide(
+                                //           color: Color(0xFFf1f1f1),
+                                //         ),
+                                //         borderRadius: BorderRadius.all(
+                                //             Radius.circular(10))),
+                                //     enabledBorder: OutlineInputBorder(
+                                //         borderSide: BorderSide(
+                                //           color: Color(0xFFf1f1f1),
+                                //         ),
+                                //         borderRadius: BorderRadius.all(
+                                //             Radius.circular(10))),
+                                //     focusedBorder: OutlineInputBorder(
+                                //         borderSide: BorderSide(
+                                //           color: Color(0xFFf1f1f1),
+                                //         ),
+                                //         borderRadius: BorderRadius.all(
+                                //             Radius.circular(10))),
+                                //     fillColor: Color(0xFFf1f1f1),
+                                //     filled: true,
+                                //   ),
+                                //   isDense: true,
+                                //   icon: const Icon(
+                                //     Icons.arrow_drop_down,
+                                //   ),
+                                //   iconSize: 30,
+                                //   items: e.landExtentList.map((item) {
+                                //     return DropdownMenuItem(
+                                //       value: item['id'].toString(),
+                                //       child: Text(
+                                //         item['name'],
+                                //         style: const TextStyle(
+                                //             color: Colors.black),
+                                //       ),
+                                //     );
+                                //   }).toList(),
+                                //   value: e.extentDropDownValue,
+                                //   validator: (value) {
+                                //     if (value == null || value.isEmpty) {
+                                //       return 'Field is required';
+                                //     }
+                                //     return null;
+                                //   },
+                                //   onChanged: (value) {
+                                //     log('Selected Value is $value');
+                                //     e.extentDropDownValue = value.toString();
+                                //   },
+                                // ),
                               ],
                             ),
                           ),
@@ -222,56 +257,90 @@ class ServiceRequestForm2 extends StatelessWidget {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                DropdownButtonFormField(
+                                TextFormField(
+                                  maxLength: 4,
+                                  keyboardType: TextInputType.number,
+                                  controller: e.extentCentController,
+                                  style: const TextStyle(color: Colors.black),
                                   decoration: const InputDecoration(
                                     border: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0xFFf1f1f1),
                                         ),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
                                     enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0xFFf1f1f1),
                                         ),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
                                     focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0xFFf1f1f1),
                                         ),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
                                     fillColor: Color(0xFFf1f1f1),
                                     filled: true,
                                   ),
-                                  isDense: true,
-                                  icon: const Icon(
-                                    Icons.arrow_drop_down,
-                                  ),
-                                  iconSize: 30,
-                                  items: e.centsList.map((item) {
-                                    return DropdownMenuItem(
-                                      value: item['id'].toString(),
-                                      child: Text(
-                                        item['name'],
-                                        style: const TextStyle(
-                                            color: Colors.black),
-                                      ),
-                                    );
-                                  }).toList(),
-                                  value: e.centsDropDownValue,
                                   validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Field is required';
+                                    if (value.toString().isEmpty) {
+                                      return 'Cents is required';
                                     }
                                     return null;
                                   },
-                                  onChanged: (value) {
-                                    log('Selected Value is $value');
-                                    e.centsDropDownValue = value.toString();
-                                  },
                                 ),
+                                // DropdownButtonFormField(
+                                //   decoration: const InputDecoration(
+                                //     border: OutlineInputBorder(
+                                //         borderSide: BorderSide(
+                                //           color: Color(0xFFf1f1f1),
+                                //         ),
+                                //         borderRadius: BorderRadius.all(
+                                //             Radius.circular(10))),
+                                //     enabledBorder: OutlineInputBorder(
+                                //         borderSide: BorderSide(
+                                //           color: Color(0xFFf1f1f1),
+                                //         ),
+                                //         borderRadius: BorderRadius.all(
+                                //             Radius.circular(10))),
+                                //     focusedBorder: OutlineInputBorder(
+                                //         borderSide: BorderSide(
+                                //           color: Color(0xFFf1f1f1),
+                                //         ),
+                                //         borderRadius: BorderRadius.all(
+                                //             Radius.circular(10))),
+                                //     fillColor: Color(0xFFf1f1f1),
+                                //     filled: true,
+                                //   ),
+                                //   isDense: true,
+                                //   icon: const Icon(
+                                //     Icons.arrow_drop_down,
+                                //   ),
+                                //   iconSize: 30,
+                                //   items: e.centsList.map((item) {
+                                //     return DropdownMenuItem(
+                                //       value: item['id'].toString(),
+                                //       child: Text(
+                                //         item['name'],
+                                //         style: const TextStyle(
+                                //             color: Colors.black),
+                                //       ),
+                                //     );
+                                //   }).toList(),
+                                //   value: e.centsDropDownValue,
+                                //   validator: (value) {
+                                //     if (value == null || value.isEmpty) {
+                                //       return 'Field is required';
+                                //     }
+                                //     return null;
+                                //   },
+                                //   onChanged: (value) {
+                                //     log('Selected Value is $value');
+                                //     e.centsDropDownValue = value.toString();
+                                //   },
+                                // ),
                               ],
                             ),
                           ),
@@ -289,7 +358,7 @@ class ServiceRequestForm2 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
-                        keyboardType: TextInputType.phone,
+                        maxLength: 12,
                         controller: e.doorNumController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
@@ -522,56 +591,88 @@ class ServiceRequestForm2 extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      DropdownButtonFormField(
+                      TextFormField(
+                        controller: e.districtController,
+                        style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFf1f1f1),
                               ),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(10))),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(10))),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFf1f1f1),
                               ),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(10))),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(10))),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFf1f1f1),
                               ),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(10))),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(10))),
                           fillColor: Color(0xFFf1f1f1),
                           filled: true,
                         ),
-                        isDense: true,
-                        icon: const Icon(
-                          Icons.arrow_drop_down,
-                        ),
-                        iconSize: 30,
-                        items: e.districtList.map((item) {
-                          return DropdownMenuItem(
-                            value: item['id'].toString(),
-                            child: Text(
-                              item['name'],
-                              style: const TextStyle(
-                                  color: Colors.black),
-                            ),
-                          );
-                        }).toList(),
-                        value: e.districtDropDownValue,
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Field is required';
+                          if (value.toString().isEmpty) {
+                            return 'District Name is required';
                           }
                           return null;
                         },
-                        onChanged: (value) {
-                          log('Selected Value is $value');
-                          e.districtDropDownValue = value.toString();
-                        },
                       ),
+                      // DropdownButtonFormField(
+                      //   decoration: const InputDecoration(
+                      //     border: OutlineInputBorder(
+                      //         borderSide: BorderSide(
+                      //           color: Color(0xFFf1f1f1),
+                      //         ),
+                      //         borderRadius: BorderRadius.all(
+                      //             Radius.circular(10))),
+                      //     enabledBorder: OutlineInputBorder(
+                      //         borderSide: BorderSide(
+                      //           color: Color(0xFFf1f1f1),
+                      //         ),
+                      //         borderRadius: BorderRadius.all(
+                      //             Radius.circular(10))),
+                      //     focusedBorder: OutlineInputBorder(
+                      //         borderSide: BorderSide(
+                      //           color: Color(0xFFf1f1f1),
+                      //         ),
+                      //         borderRadius: BorderRadius.all(
+                      //             Radius.circular(10))),
+                      //     fillColor: Color(0xFFf1f1f1),
+                      //     filled: true,
+                      //   ),
+                      //   isDense: true,
+                      //   icon: const Icon(
+                      //     Icons.arrow_drop_down,
+                      //   ),
+                      //   iconSize: 30,
+                      //   items: e.districtList.map((item) {
+                      //     return DropdownMenuItem(
+                      //       value: item['id'].toString(),
+                      //       child: Text(
+                      //         item['name'],
+                      //         style: const TextStyle(
+                      //             color: Colors.black),
+                      //       ),
+                      //     );
+                      //   }).toList(),
+                      //   value: e.districtDropDownValue,
+                      //   validator: (value) {
+                      //     if (value == null || value.isEmpty) {
+                      //       return 'Field is required';
+                      //     }
+                      //     return null;
+                      //   },
+                      //   onChanged: (value) {
+                      //     log('Selected Value is $value');
+                      //     e.districtDropDownValue = value.toString();
+                      //   },
+                      // ),
                       const SizedBox(
                         height: 10,
                       ),
@@ -584,6 +685,7 @@ class ServiceRequestForm2 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        maxLength: 6,
                         keyboardType: TextInputType.number,
                         controller: e.pinCodeController,
                         style: const TextStyle(color: Colors.black),
@@ -628,6 +730,7 @@ class ServiceRequestForm2 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        maxLength: 10,
                         controller: e.voterIdController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
@@ -655,6 +758,9 @@ class ServiceRequestForm2 extends StatelessWidget {
                         validator: (value) {
                           if (value.toString().isEmpty) {
                             return 'Voter ID is required';
+                          } else if (value.toString().length < 10 ||
+                              value.toString().length > 10) {
+                            return 'Enter valid Voter ID';
                           }
                           return null;
                         },
@@ -672,14 +778,14 @@ class ServiceRequestForm2 extends StatelessWidget {
                   Utilities.form2List = jsonEncode({
                     "aadhaarNumber" : e.aadhaarNumController.text.toString(),
                     "cultivationType" : e.cultivationTypeController.text.toString(),
-                    "landExtent" : e.extentDropDownValue.toString(),
-                    "landCents" : e.centsDropDownValue.toString(),
+                    "landExtent" : e.extentActressController.text.toString(),
+                    "landCents" : e.extentCentController.text.toString(),
                     "doorNum" : e.doorNumController.text.toString(),
                     "streetName" : e.streetController.text.toString(),
                     "villageName" : e.villageController.text.toString(),
                     "mandalName" : e.mandalNameController.text.toString(),
                     "stateID" : e.stateDropDownValue.toString(),
-                    "districtID" : e.districtDropDownValue.toString(),
+                    "districtID" : e.districtController.text.toString(),
                     "pinCode" : e.pinCodeController.text.toString(),
                     "voterID" : e.voterIdController.text.toString(),
                   });

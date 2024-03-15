@@ -44,7 +44,7 @@ class PdProfile extends StatelessWidget {
                          TableRow(children: [
                           TableCell(
                               child: Text(
-                            'Project Director : ',
+                            '${e.empDesignation.toString()} : ',
                             style: TextStyle(color: Color(0xFF583988)),
                           )),
                           TableCell(

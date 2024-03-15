@@ -49,7 +49,13 @@ class SocialworkerForm1Controller extends GetxController {
     {'id': '1', 'name': 'Visakhapatnam'},
     {'id': '2', 'name': 'Vijayanagar'},
   ];
+  List genderTypes = [
+    {"id": "Male", "name": "Male"},
+    {"id": "Female", "name": "Female"},
+    {"id": "Other", "name": "Other"},
+  ];
   String? districtDropDownValue;
+  String? genderDropDownValue;
 
 
   @override

@@ -7,6 +7,7 @@ class ServiceRequestForm1Controller extends GetxController {
   final formKey = GlobalKey<FormState>();
   dynamic argumentData = Get.arguments;
   String? serviceTypeDropDownValue;
+  String? genderDropDownValue;
   final TextEditingController recipientController = TextEditingController();
   final TextEditingController surNameController = TextEditingController();
   final TextEditingController sonOfController = TextEditingController();
@@ -40,6 +41,12 @@ class ServiceRequestForm1Controller extends GetxController {
     {"id": "23", "name": "OLD AGE HOMES"},
   ];
 
+  List genderTypes = [
+    {"id": "Male", "name": "Male"},
+    {"id": "Female", "name": "Female"},
+    {"id": "Other", "name": "Other"},
+  ];
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -50,10 +57,10 @@ class ServiceRequestForm1Controller extends GetxController {
   datePicker(context) async {
     DateTime? pickedDate = await showDatePicker(
         context: context,
-        initialDate: DateTime.now(), //get today's date
+        initialDate: DateTime(1990), //get today's date
         firstDate: DateTime(
-            2000), //DateTime.now() - not to allow to choose before today.
-        lastDate: DateTime(2101));
+            1900), //DateTime.now() - not to allow to choose before today.
+        lastDate: DateTime(2040));
     if (pickedDate != null) {
       log(pickedDate
           .toString()); //get the picked date in the format => 2022-07-04 00:00:00.000

@@ -197,6 +197,35 @@ class ApiService {
     return response.stream.bytesToString();
   }
 
+  static Future<String> getServiceReqVerificationData(
+      String url,
+      String empID,
+      String empCode,
+      String roleType,
+      String userID,
+      ) async {
+    var postUri = Uri.parse('${Url.baseUrl}/$url');
+    log(postUri.toString());
+    log(Url.apiToken.toString());
+    http.MultipartRequest request = http.MultipartRequest("POST", postUri);
+
+    Map<String, String> headers = {
+      "Content-Type": "multipart/form-data",
+      "Authorization": "Bearer ${Url.apiToken}"
+    };
+
+    request.headers.addAll(headers);
+
+    request.fields["emp_id"] = empID;
+    request.fields["inputEmpCode"] = empCode;
+    request.fields["role_type"] = roleType;
+    request.fields["user_id"] = userID;
+
+    http.StreamedResponse response = await request.send();
+
+    return response.stream.bytesToString();
+  }
+
   static Future<String> getProfilesListData(
       String url,
       String user_id,

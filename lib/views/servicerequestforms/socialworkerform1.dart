@@ -56,6 +56,7 @@ class SocialworkerForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        maxLength: 25,
                         controller: e.recipientController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
@@ -98,6 +99,7 @@ class SocialworkerForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        maxLength: 25,
                         controller: e.surNameController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
@@ -167,7 +169,7 @@ class SocialworkerForm1 extends StatelessWidget {
                               BorderRadius.all(Radius.circular(10))),
                           fillColor: Color(0xFFf1f1f1),
                           filled: true,
-                          hintText: 'DDMMYYYY',
+                          hintText: 'YYYY-MM-DD',
                           suffixIcon: Icon(Icons.calendar_month),
                         ),
                         validator: (value) {
@@ -190,9 +192,9 @@ class SocialworkerForm1 extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      TextFormField(
-                        controller: e.genderController,
-                        style: const TextStyle(color: Colors.black),
+                      DropdownButtonFormField(
+                        style: const TextStyle(fontSize: 12,fontWeight: FontWeight.w400),
+                        isExpanded: true,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -213,14 +215,65 @@ class SocialworkerForm1 extends StatelessWidget {
                               borderRadius:
                               BorderRadius.all(Radius.circular(10))),
                           fillColor: Color(0xFFf1f1f1),
-                          filled: true,),
-                        validator: (value){
-                          if(value.toString().isEmpty){
-                            return 'Gender is required';
+                          filled: true,
+                        ),
+                        isDense: true,
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                        ),
+                        iconSize: 30,
+                        items: e.genderTypes.map((item) {
+                          return DropdownMenuItem(
+                            value: item['id'].toString(),
+                            child: Text(
+                              item['name'],
+                              style: const TextStyle(color: Colors.black),
+                            ),
+                          );
+                        }).toList(),
+                        value: e.genderDropDownValue,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Field is required';
                           }
                           return null;
                         },
+                        onChanged: (value) {
+                          log('Selected Value is $value');
+                          e.genderDropDownValue = value.toString();
+                        },
                       ),
+                      // TextFormField(
+                      //   controller: e.genderController,
+                      //   style: const TextStyle(color: Colors.black),
+                      //   decoration: const InputDecoration(
+                      //     border: OutlineInputBorder(
+                      //         borderSide: BorderSide(
+                      //           color: Color(0xFFf1f1f1),
+                      //         ),
+                      //         borderRadius:
+                      //         BorderRadius.all(Radius.circular(10))),
+                      //     enabledBorder: OutlineInputBorder(
+                      //         borderSide: BorderSide(
+                      //           color: Color(0xFFf1f1f1),
+                      //         ),
+                      //         borderRadius:
+                      //         BorderRadius.all(Radius.circular(10))),
+                      //     focusedBorder: OutlineInputBorder(
+                      //         borderSide: BorderSide(
+                      //           color: Color(0xFFf1f1f1),
+                      //         ),
+                      //         borderRadius:
+                      //         BorderRadius.all(Radius.circular(10))),
+                      //     fillColor: Color(0xFFf1f1f1),
+                      //     filled: true,),
+                      //   validator: (value){
+                      //     if(value.toString().isEmpty){
+                      //       return 'Gender is required';
+                      //     }
+                      //     return null;
+                      //   },
+                      // ),
                       const SizedBox(
                         height: 10,
                       ),
@@ -233,6 +286,7 @@ class SocialworkerForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        maxLength: 50,
                         controller: e.emailController,
                         keyboardType: TextInputType.emailAddress,
                         style: const TextStyle(color: Colors.black),
@@ -276,6 +330,7 @@ class SocialworkerForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        maxLength: 10,
                         controller: e.mobNumController,
                         keyboardType: TextInputType.phone,
                         style: const TextStyle(color: Colors.black),
@@ -321,6 +376,7 @@ class SocialworkerForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        maxLength: 10,
                         keyboardType: TextInputType.phone,
                         controller: e.altMobNumController,
                         style: const TextStyle(color: Colors.black),
@@ -412,7 +468,9 @@ class SocialworkerForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        maxLength: 12,
                         controller: e.aadhaarNumController,
+                        keyboardType: TextInputType.phone,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(
@@ -457,6 +515,7 @@ class SocialworkerForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        maxLength: 10,
                         controller: e.voterIdController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
@@ -502,7 +561,6 @@ class SocialworkerForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
-                        keyboardType: TextInputType.phone,
                         controller: e.doorNumController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
@@ -735,56 +793,88 @@ class SocialworkerForm1 extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      DropdownButtonFormField(
+                      TextFormField(
+                        controller: e.districtController,
+                        style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFf1f1f1),
                               ),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(10))),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(10))),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFf1f1f1),
                               ),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(10))),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(10))),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFf1f1f1),
                               ),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(10))),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(10))),
                           fillColor: Color(0xFFf1f1f1),
                           filled: true,
                         ),
-                        isDense: true,
-                        icon: const Icon(
-                          Icons.arrow_drop_down,
-                        ),
-                        iconSize: 30,
-                        items: e.districtList.map((item) {
-                          return DropdownMenuItem(
-                            value: item['id'].toString(),
-                            child: Text(
-                              item['name'],
-                              style: const TextStyle(
-                                  color: Colors.black),
-                            ),
-                          );
-                        }).toList(),
-                        value: e.districtDropDownValue,
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Field is required';
+                          if (value.toString().isEmpty) {
+                            return 'District Name is required';
                           }
                           return null;
                         },
-                        onChanged: (value) {
-                          log('Selected Value is $value');
-                          e.districtDropDownValue = value.toString();
-                        },
                       ),
+                      // DropdownButtonFormField(
+                      //   decoration: const InputDecoration(
+                      //     border: OutlineInputBorder(
+                      //         borderSide: BorderSide(
+                      //           color: Color(0xFFf1f1f1),
+                      //         ),
+                      //         borderRadius: BorderRadius.all(
+                      //             Radius.circular(10))),
+                      //     enabledBorder: OutlineInputBorder(
+                      //         borderSide: BorderSide(
+                      //           color: Color(0xFFf1f1f1),
+                      //         ),
+                      //         borderRadius: BorderRadius.all(
+                      //             Radius.circular(10))),
+                      //     focusedBorder: OutlineInputBorder(
+                      //         borderSide: BorderSide(
+                      //           color: Color(0xFFf1f1f1),
+                      //         ),
+                      //         borderRadius: BorderRadius.all(
+                      //             Radius.circular(10))),
+                      //     fillColor: Color(0xFFf1f1f1),
+                      //     filled: true,
+                      //   ),
+                      //   isDense: true,
+                      //   icon: const Icon(
+                      //     Icons.arrow_drop_down,
+                      //   ),
+                      //   iconSize: 30,
+                      //   items: e.districtList.map((item) {
+                      //     return DropdownMenuItem(
+                      //       value: item['id'].toString(),
+                      //       child: Text(
+                      //         item['name'],
+                      //         style: const TextStyle(
+                      //             color: Colors.black),
+                      //       ),
+                      //     );
+                      //   }).toList(),
+                      //   value: e.districtDropDownValue,
+                      //   validator: (value) {
+                      //     if (value == null || value.isEmpty) {
+                      //       return 'Field is required';
+                      //     }
+                      //     return null;
+                      //   },
+                      //   onChanged: (value) {
+                      //     log('Selected Value is $value');
+                      //     e.districtDropDownValue = value.toString();
+                      //   },
+                      // ),
                       const SizedBox(
                         height: 10,
                       ),
@@ -797,6 +887,7 @@ class SocialworkerForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        maxLength: 6,
                         keyboardType: TextInputType.number,
                         controller: e.pinCodeController,
                         style: const TextStyle(color: Colors.black),
@@ -850,7 +941,7 @@ class SocialworkerForm1 extends StatelessWidget {
                     "email" : e.emailController.text.toString(),
                     "mobile" : e.mobNumController.text.toString(),
                     "alt_mobile" : e.altMobNumController.text.toString(),
-                    "gender" : e.genderController.text.toString(),
+                    "gender" : e.genderDropDownValue.toString(),
                     "qualification" : e.qualificationController.text.toString(),
                     "aadhaar_no" : e.aadhaarNumController.text.toString(),
                     "voter_id_no" : e.voterIdController.text.toString(),
@@ -859,7 +950,7 @@ class SocialworkerForm1 extends StatelessWidget {
                     "village" : e.villageController.text.toString(),
                     "mandal" : e.mandalNameController.text.toString(),
                     "state_id" : e.stateDropDownValue.toString(),
-                    "district" : e.districtDropDownValue.toString(),
+                    "district" : e.districtController.text.toString(),
                     "pincode" :  e.pinCodeController.text.toString(),
                   });
                   log(Utilities.socialWorkerFormList.toString());

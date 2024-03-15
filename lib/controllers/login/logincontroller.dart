@@ -27,6 +27,7 @@ class LoginController extends GetxController {
     log('-----------------------');
     await ApiService.empLogin("login", empID, empPassword).then((success) {
       var responseBody = json.decode(success);
+      log("afterlogin details");
       log(responseBody.toString());
 
       log(responseBody.toString());

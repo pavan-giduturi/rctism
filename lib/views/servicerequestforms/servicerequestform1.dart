@@ -46,7 +46,7 @@ class ServiceRequestForm1 extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'Recipient Name',
+                        'Recipient Name *',
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold),
                       ),
@@ -54,6 +54,7 @@ class ServiceRequestForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        maxLength: 25,
                         controller: e.recipientController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
@@ -89,7 +90,7 @@ class ServiceRequestForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       const Text(
-                        'Surname',
+                        'Surname *',
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold),
                       ),
@@ -97,6 +98,7 @@ class ServiceRequestForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        maxLength: 25,
                         controller: e.surNameController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
@@ -140,6 +142,7 @@ class ServiceRequestForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        maxLength: 25,
                         controller: e.sonOfController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
@@ -210,7 +213,7 @@ class ServiceRequestForm1 extends StatelessWidget {
                                   BorderRadius.all(Radius.circular(10))),
                           fillColor: Color(0xFFf1f1f1),
                           filled: true,
-                          hintText: 'DDMMYYYY',
+                          hintText: 'YYYY-MM-DD',
                           suffixIcon: Icon(Icons.calendar_month),
                         ),
                         validator: (value) {
@@ -295,38 +298,89 @@ class ServiceRequestForm1 extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      TextFormField(
-                        controller: e.genderController,
-                        style: const TextStyle(color: Colors.black),
+                      DropdownButtonFormField(
+                        style: const TextStyle(fontSize: 12,fontWeight: FontWeight.w400),
+                        isExpanded: true,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFf1f1f1),
                               ),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                              BorderRadius.all(Radius.circular(10))),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFf1f1f1),
                               ),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                              BorderRadius.all(Radius.circular(10))),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFf1f1f1),
                               ),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                              BorderRadius.all(Radius.circular(10))),
                           fillColor: Color(0xFFf1f1f1),
                           filled: true,
                         ),
+                        isDense: true,
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                        ),
+                        iconSize: 30,
+                        items: e.genderTypes.map((item) {
+                          return DropdownMenuItem(
+                            value: item['id'].toString(),
+                            child: Text(
+                              item['name'],
+                              style: const TextStyle(color: Colors.black),
+                            ),
+                          );
+                        }).toList(),
+                        value: e.genderDropDownValue,
                         validator: (value) {
-                          if (value.toString().isEmpty) {
-                            return 'Gender is required';
+                          if (value == null || value.isEmpty) {
+                            return 'Field is required';
                           }
                           return null;
                         },
+                        onChanged: (value) {
+                          log('Selected Value is $value');
+                          e.genderDropDownValue = value.toString();
+                        },
                       ),
+                      // TextFormField(
+                      //   controller: e.genderController,
+                      //   style: const TextStyle(color: Colors.black),
+                      //   decoration: const InputDecoration(
+                      //     border: OutlineInputBorder(
+                      //         borderSide: BorderSide(
+                      //           color: Color(0xFFf1f1f1),
+                      //         ),
+                      //         borderRadius:
+                      //             BorderRadius.all(Radius.circular(10))),
+                      //     enabledBorder: OutlineInputBorder(
+                      //         borderSide: BorderSide(
+                      //           color: Color(0xFFf1f1f1),
+                      //         ),
+                      //         borderRadius:
+                      //             BorderRadius.all(Radius.circular(10))),
+                      //     focusedBorder: OutlineInputBorder(
+                      //         borderSide: BorderSide(
+                      //           color: Color(0xFFf1f1f1),
+                      //         ),
+                      //         borderRadius:
+                      //             BorderRadius.all(Radius.circular(10))),
+                      //     fillColor: Color(0xFFf1f1f1),
+                      //     filled: true,
+                      //   ),
+                      //   validator: (value) {
+                      //     if (value.toString().isEmpty) {
+                      //       return 'Gender is required';
+                      //     }
+                      //     return null;
+                      //   },
+                      // ),
                       const SizedBox(
                         height: 10,
                       ),
@@ -339,6 +393,7 @@ class ServiceRequestForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        maxLength: 10,
                         controller: e.mobNumController,
                         keyboardType: TextInputType.phone,
                         style: const TextStyle(color: Colors.black),
@@ -386,6 +441,7 @@ class ServiceRequestForm1 extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
+                        maxLength: 10,
                         keyboardType: TextInputType.phone,
                         controller: e.altMobNumController,
                         style: const TextStyle(color: Colors.black),
@@ -436,7 +492,8 @@ class ServiceRequestForm1 extends StatelessWidget {
                     "recipientSurname": e.surNameController.text.toString(),
                     "recipientSonOf": e.sonOfController.text.toString(),
                     "recipientDOB": e.dobController.text.toString(),
-                    "recipientGender": e.genderController.text.toString(),
+                    "recipientGender": e.genderDropDownValue.toString(),
+                    // "recipientGender": e.genderController.text.toString(),
                     "recipientMobNumber": e.mobNumController.text.toString(),
                     "recipientAltMobNumber":
                         e.altMobNumController.text.toString(),

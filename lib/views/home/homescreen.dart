@@ -314,9 +314,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                Text(
-                                  'Total Service Requests ${e.dashboardData['total_service_requests_count'].toString()}',
-                                  style: TextStyle(color: Colors.white),
+                                Visibility(
+                                  visible: Utilities.isSocialWorker,
+                                  child: Text(
+                                    'Total Service Requests (${e.dashboardData['total_service_requests_count'].toString()})',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: 10,
@@ -351,21 +354,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         Visibility(
                           visible: Utilities.isServiceRequest,
                           child: Card(
-                            margin: const EdgeInsets.symmetric(vertical: 20),
-                            color: const Color(0xFFd0cadc),
+                            margin:  EdgeInsets.symmetric(vertical: 20),
+                            color:  Color(0xFFd0cadc),
                             child: ListTile(
                               leading: Image.asset(
                                 'assets/icons/lockicon.png',
                                 height: 30,
                                 width: 30,
                               ),
-                              title: const Padding(
+                              title:  Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Service Requests (28)',
+                                        'Service Requests (${e.dashboardData['total_service_requests_count'].toString()})',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18),
@@ -383,6 +386,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 25,
                                 width: 25,
                               ),
+                              onTap: (){
+                                Get.to(() => const ServiceRequestslist());
+                              },
                             ),
                           ),
                         ),

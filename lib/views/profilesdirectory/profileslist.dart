@@ -78,10 +78,10 @@ class Profileslist extends StatelessWidget {
                     ],
                   ),
                   onTap: () {
-                    // if(e.profileslistData[index]['emp_id'].toString().isNotEmpty){
-                    //   Get.to(() =>  EmpProfile(),
-                    //       arguments: e.profileslistData[index]['emp_id']);
-                    // }else{
+                    if(e.profileslistData[index]['emp_id'].toString().isNotEmpty && e.profileslistData[index]['emp_id'].toString() != "null"){
+                      Get.to(() =>  EmpProfile(),
+                          arguments: e.profileslistData[index]['emp_id']);
+                    }else{
                       Get.snackbar('Alert', "Sorry...",
                           messageText:  Text(
                             "This profile activation is temporarily unavailable",
@@ -96,7 +96,7 @@ class Profileslist extends StatelessWidget {
                           overlayBlur: 5,
                           colorText: Colors.black,
                           animationDuration: const Duration(seconds: 3));
-                    // }
+                    }
 
                   },
                   shape: const Border(

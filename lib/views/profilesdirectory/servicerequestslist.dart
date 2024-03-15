@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 
 import '../../controllers/pdprofile/pdprofilecontroller.dart';
 import '../../controllers/profilesdirectory/profileslistcontroller.dart';
+import '../../helpers/utilities.dart';
+import '../servicerequestforms/servicerequestform1.dart';
+import '../verification/verification.dart';
 
 class ServiceRequestslist extends StatelessWidget {
   const ServiceRequestslist({super.key});
@@ -21,11 +24,31 @@ class ServiceRequestslist extends StatelessWidget {
               titlename = "My Social Workers";
             } else if(e.profileData['role'].toString() == "sw"){
               titlename = "Service Requests";
+            } else if(e.profileData['role'].toString() == "srq"){
+              titlename = "Service Requests";
             }
 
             return Scaffold(
               appBar: AppBar(
                 title: Text(titlename.toString(),style: TextStyle(fontWeight: FontWeight.bold)),
+                actions: [
+                  Visibility(
+                    visible: Utilities.isSocialWorker,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: GestureDetector(
+                        child: const Icon(
+                          Icons.add_circle_outlined,
+                          color: Colors.deepPurple,
+                        ),
+                        onTap: () {
+                          Get.to(() => const ServiceRequestForm1(),arguments: "add");
+
+                        },
+                      ),
+                    ),
+                  )
+                ],
               ),
               body: ListView.builder(
                   itemCount: e.serviceRequestslistData.length,
@@ -38,7 +61,7 @@ class ServiceRequestslist extends StatelessWidget {
                       //   color: Colors.white,
                       // ),
                       child: ListTile(
-                        leading: const Icon(Icons.circle,size: 60),
+                        leading: const Icon(Icons.account_circle,size: 60),
                         trailing: const Icon(Icons.arrow_forward_ios),
                         title: Container(
                           child: Column(
@@ -52,7 +75,7 @@ class ServiceRequestslist extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-
+                          Get.to(() =>  VerificationScreen(),arguments: e.serviceRequestslistData[index]["id"].toString());
                         },
                         shape: Border(bottom: BorderSide(color: Colors.black45,width: 1, )),
                       ),

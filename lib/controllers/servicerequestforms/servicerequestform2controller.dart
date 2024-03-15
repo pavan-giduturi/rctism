@@ -16,9 +16,11 @@ class ServiceRequestForm2Controller extends GetxController {
   final TextEditingController districtController = TextEditingController();
   final TextEditingController pinCodeController = TextEditingController();
   final TextEditingController voterIdController = TextEditingController();
+  final TextEditingController extentActressController = TextEditingController();
+  final TextEditingController extentCentController = TextEditingController();
 
   List landExtentList = [
-    {'id': '1', 'name': 'Acres'}
+    {'id': '1', 'name': '1'},
   ];
 
   List statesList = [

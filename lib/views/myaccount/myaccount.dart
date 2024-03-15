@@ -85,8 +85,8 @@ class MyAccount extends StatelessWidget {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                const Text(
-                                  'Designation of Officer',
+                                 Text(
+                                  e.empDesignation.toString(),
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 const SizedBox(
@@ -124,8 +124,8 @@ class MyAccount extends StatelessWidget {
                           child: Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(20),
-                            child: const Text(
-                              'Under PD/SW/Service Request',
+                            child:  Text(
+                              e.underTitle.toString(),
                               style: TextStyle(
                                 color: Color(0xff603f95),
                                 fontWeight: FontWeight.bold,

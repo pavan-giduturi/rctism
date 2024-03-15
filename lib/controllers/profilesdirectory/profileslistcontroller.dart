@@ -98,7 +98,7 @@ class ProfileslistController extends GetxController{
         }
         update();
       });
-    } else if(empMainRoleType == "sw"){
+    } else if(empMainRoleType == "sw" || empMainRoleType == "srq"){
       await ApiService.getProfilesListData("service_request",userID,empCode,empRoleType,empID).then((success) {
         var responseBody = json.decode(success);
         // log(responseBody.toString());
